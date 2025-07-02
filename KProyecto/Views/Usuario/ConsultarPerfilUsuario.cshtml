@@ -28,7 +28,8 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Identificación:</label>
-                            @Html.TextBoxFor(x => x.Identificacion, new { @type = "text", @class = "form-control form-control-lg" })
+                            @Html.TextBoxFor(x => x.Identificacion, new { @type = "text", @class = "form-control form-control-lg",
+                       @onkeyup = "ConsultarPersonaApi()" })
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -55,3 +56,26 @@
     }
 
 </div>
+
+<script>
+
+    function ConsultarPersonaApi() {
+
+        $("#Nombre").val("");
+        let identificacion = $("#Identificacion").val();
+
+        if (identificacion.length >= 9) {
+
+            $.ajax({
+                type: 'GET',
+                url: 'https://apis.gometa.org/cedulas/' + identificacion,
+                dataType: 'json',
+                success: function (data) {
+                    $("#Nombre").val(data.nombre);
+                }
+            });
+        }
+
+    }
+
+</script>

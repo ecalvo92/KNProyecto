@@ -30,7 +30,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1"><i class="ti-id-badge"></i></span>
                             </div>
-                            @Html.TextBoxFor(x => x.Identificacion, new { @type = "text", @class = "form-control form-control-lg", @placeholder = "Identificación" })
+                            @Html.TextBoxFor(x => x.Identificacion, new { @type = "text", @class = "form-control form-control-lg", @placeholder = "Identificación",
+                            @onkeyup = "ConsultarPersonaApi()" })
                         </div>
 
                         <div class="input-group mb-3">
@@ -54,8 +55,6 @@
                             @Html.TextBoxFor(x => x.Contrasenna, new { @type = "password", @class = "form-control form-control-lg", @placeholder = "Contraseña" })
                         </div>
 
-
-
                         <div class="form-group text-center">
                             <div class="col-xs-12 p-b-20">
                                 <button class="btn btn-block btn-lg btn-info" type="submit">Procesar</button>
@@ -78,3 +77,26 @@
 
     </div>
 </div>
+
+<script>
+
+    function ConsultarPersonaApi() {
+
+        $("#Nombre").val("");
+        let identificacion = $("#Identificacion").val();
+
+        if (identificacion.length >= 9) {
+
+            $.ajax({
+                type: 'GET',
+                url: 'https://apis.gometa.org/cedulas/' + identificacion,
+                dataType: 'json',
+                success: function (data) {
+                    $("#Nombre").val(data.nombre);
+                }
+            });
+        }
+
+    }
+
+</script>

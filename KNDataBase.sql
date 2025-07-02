@@ -22,7 +22,7 @@ GO
 
 SET IDENTITY_INSERT [dbo].[TUsuario] ON 
 GO
-INSERT [dbo].[TUsuario] ([IdUsuario], [Identificacion], [Nombre], [Correo], [Contrasenna]) VALUES (2, N'304590415', N'Eduardo Calvo', N'ecalvo90415@ufide.ac.cr', N'90415')
+INSERT [dbo].[TUsuario] ([IdUsuario], [Identificacion], [Nombre], [Correo], [Contrasenna]) VALUES (2, N'304590415', N'EDUARDO JOSE CALVO CASTILLO', N'ecalvo90415@ufide.ac.cr', N'90415')
 GO
 SET IDENTITY_INSERT [dbo].[TUsuario] OFF
 GO

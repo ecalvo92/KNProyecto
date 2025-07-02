@@ -4,4 +4,54 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Html.TextBoxFor(x => x.Nombre, new { @type = "text", @class = "form-control form-control-lg", @placeholder = "Nombre" })
+<div class="card">
+
+    @using (Html.BeginForm("ActualizarPerfilUsuario", "Usuario", FormMethod.Post, new { @class = "form-horizontal m-t-20" }))
+    {
+        <div class="card-body">
+            <h4 class="card-title">Perfil de Usuario</h4>
+
+            <hr><br />
+
+            <div class="row">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-8">
+
+                    @if (!string.IsNullOrEmpty(ViewBag.Mensaje))
+                    {
+                        <div class="alert alert-warning text-center">
+                            @ViewBag.Mensaje
+                        </div>
+                    }
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Identificación:</label>
+                            @Html.TextBoxFor(x => x.Identificacion, new { @type = "text", @class = "form-control form-control-lg" })
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Nombre:</label>
+                            @Html.TextBoxFor(x => x.Nombre, new { @type = "text", @class = "form-control form-control-lg" })
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Correo:</label>
+                            @Html.TextBoxFor(x => x.Correo, new { @type = "email", @class = "form-control form-control-lg" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <button class="btn btn-block btn-lg btn-info" type="submit">Procesar</button>
+            </div>
+        </div>
+    }
+
+</div>

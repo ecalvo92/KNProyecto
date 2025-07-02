@@ -9,7 +9,7 @@ namespace KProyecto.Controllers
 {
     public class HomeController : Controller
     {
-        Utilitarios service = new Utilitarios();
+        readonly Utilitarios service = new Utilitarios();
 
         #region Index
 
@@ -128,6 +128,13 @@ namespace KProyecto.Controllers
         public ActionResult Principal()
         {
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult CerrarSesion()
+        {
+            Session.Clear();
+            return RedirectToAction("Index", "Home");
         }
 
     }

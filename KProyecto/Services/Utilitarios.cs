@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Net;
 using System.Net.Mail;
+using System.Text;
 
 namespace KProyecto.Services
 {
@@ -37,6 +38,21 @@ namespace KProyecto.Services
             {
                 return false;
             }
+        }
+
+        public string GenerarPassword(int longitud = 8)
+        {
+            const string caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            var random = new Random();
+            var sb = new StringBuilder(longitud);
+
+            for (int i = 0; i < longitud; i++)
+            {
+                int index = random.Next(caracteres.Length);
+                sb.Append(caracteres[index]);
+            }
+
+            return sb.ToString();
         }
 
     }

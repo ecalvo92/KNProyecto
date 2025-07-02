@@ -270,6 +270,7 @@
     <Content Include="Views\Home\Registro.cshtml" />
     <Content Include="Views\Home\RecuperarContrasenna.cshtml" />
     <Content Include="Views\Usuario\ConsultarPerfilUsuario.cshtml" />
+    <Content Include="Views\Usuario\CambiarContrasenna.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -33,6 +33,7 @@ namespace KProyecto.Controllers
         {
             using (var dbContext = new KNDataBaseEntities())
             {
+                ViewBag.Mensaje = "No se pudo actualizar la información";
 
                 var idUsuario = long.Parse(Session["IdUsuario"].ToString());
                 var result = dbContext.TUsuario.FirstOrDefault(u => u.IdUsuario == idUsuario);
@@ -49,12 +50,45 @@ namespace KProyecto.Controllers
                     {
                         ViewBag.Mensaje = "Información actualizada correctamente";
                         Session["Nombre"] = usuario.Nombre;
-                    }                        
-                    else
-                        ViewBag.Mensaje = "No se pudo actualizar la información";
+                    }                                  
                 }
 
                 return View("ConsultarPerfilUsuario");
+            }
+        }
+
+        [HttpGet]
+        public ActionResult CambiarContrasenna()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CambiarContrasenna(Usuario usuario)
+        {
+            using (var dbContext = new KNDataBaseEntities())
+            {
+                ViewBag.Mensaje = "No se pudo actualizar la información";
+
+                var idUsuario = long.Parse(Session["IdUsuario"].ToString());
+                var result = dbContext.TUsuario.FirstOrDefault(u => u.IdUsuario == idUsuario
+                                                                 && u.Contrasenna == usuario.ContrasennaAnterior);
+
+                if (result != null)
+                {
+                    result.Contrasenna = usuario.Contrasenna;
+
+                    var update = dbContext.SaveChanges();
+
+                    if (update > 0)
+                    {
+                        usuario.Contrasenna = string.Empty;
+                        usuario.ContrasennaAnterior = string.Empty;
+                        ViewBag.Mensaje = "Información actualizada correctamente";
+                    }
+                }
+
+                return View(usuario);
             }
         }
 

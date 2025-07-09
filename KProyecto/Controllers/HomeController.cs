@@ -132,12 +132,14 @@ namespace KProyecto.Controllers
 
         #endregion
 
+        [FiltroSesion]
         [HttpGet]
         public ActionResult Principal()
         {
             return View();
         }
 
+        [FiltroSesion]
         [HttpGet]
         public ActionResult CerrarSesion()
         {

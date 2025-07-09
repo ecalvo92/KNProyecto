@@ -13,9 +13,9 @@
         <hr><br />
 
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-1">
             </div>
-            <div class="col-md-8">
+            <div class="col-md-10">
 
                 @if (!string.IsNullOrEmpty(ViewBag.Mensaje))
                 {
@@ -24,20 +24,29 @@
                     </div>
                 }
 
-                <table class="table table-bordered table-hover">
+                <table id="TablaDatos" class="table table-bordered table-hover">
                     <thead>
                         <tr>
                             <th>#</th>
                             <th>Nombre</th>
                             <th>Descripción</th>
+                            <th>Cantidad</th>
+                            <th>Precio</th>
+                            <th>Estado</th>
+                            <th>Imagen</th>
                         </tr>
                     </thead>
-                    <tbody> 
-                        @foreach (var item in Model) {  
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
                             <tr>
                                 <td>@item.IdProducto</td>
                                 <td>@item.Nombre</td>
                                 <td>@item.Descripcion</td>
+                                <td>@item.Cantidad</td>
+                                <td>@item.Precio</td>
+                                <td>@item.Estado</td>
+                                <td>@item.Imagen</td>
                             </tr>
                         }
                     </tbody>
@@ -54,3 +63,6 @@
     </div>
 
 </div>
+
+<script src="~/Scripts/jquery.min.js"></script>
+<script src="~/Scripts/Site/ConsultaProductos.js"></script>

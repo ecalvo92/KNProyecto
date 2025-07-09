@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace KProyecto.Controllers
 {
+    [FiltroAdministrador]
     public class ProductoController : Controller
     {
         [HttpGet]
@@ -20,16 +21,16 @@ namespace KProyecto.Controllers
                 //var result = dbContext.TProducto.ToList();
                 var result = dbContext.ConsultarProductos().ToList();
 
-                foreach (var item in result)
-                {
-                    var producto = new Producto
-                    {
-                        Nombre = item.Nombre
-                    };
-                    datos.Add(producto);
-                }
+                //foreach (var item in result)
+                //{
+                //    var producto = new Producto
+                //    {
+                //        Nombre = item.Nombre
+                //    };
+                //    datos.Add(producto);
+                //}
 
-                return View(datos);
+                return View(result);
             }
         }
     }

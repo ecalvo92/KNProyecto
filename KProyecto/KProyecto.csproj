@@ -165,6 +165,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Autenticacion.cs" />
+    <Compile Include="Models\FiltroSeguridad.cs" />
     <Compile Include="Models\Producto.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -210,12 +211,13 @@
     <Content Include="Scripts\app.init.js" />
     <Content Include="Scripts\app.min.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\Comunes.js" />
+    <Content Include="Scripts\Site\Comunes.js" />
     <Content Include="Scripts\custom.min.js" />
     <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\perfect-scrollbar.jquery.min.js" />
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\sidebarmenu.js" />
+    <Content Include="Scripts\Site\ConsultaProductos.js" />
     <Content Include="Scripts\sparkline.js" />
     <Content Include="Scripts\waves.js" />
     <Content Include="Web.config" />

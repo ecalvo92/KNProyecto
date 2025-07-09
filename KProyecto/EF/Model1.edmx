@@ -4,7 +4,19 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="KNDataBaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="KNDataBaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TProducto">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="IdProducto" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="Precio" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+          <Property Name="Imagen" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
         <EntityType Name="TRol">
           <Key>
             <PropertyRef Name="IdRol" />
@@ -35,6 +47,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="ConsultarProductos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="RegistroUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Identificacion" Type="varchar" Mode="In" />
           <Parameter Name="Nombre" Type="varchar" Mode="In" />
@@ -46,6 +59,7 @@
           <Parameter Name="Contrasenna" Type="varchar" Mode="In" />
         </Function>
         <EntityContainer Name="KNDataBaseModelStoreContainer">
+          <EntitySet Name="TProducto" EntityType="Self.TProducto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TRol" EntityType="Self.TRol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TUsuario" EntityType="Self.TUsuario" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_TUsuario_TRol" Association="Self.FK_TUsuario_TRol">
@@ -53,8 +67,7 @@
             <End Role="TUsuario" EntitySet="TUsuario" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="KNDataBaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -107,6 +120,8 @@
             <Parameter Name="Correo" Mode="In" Type="String" />
             <Parameter Name="Contrasenna" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="TProducto" EntityType="KNDataBaseModel.TProducto" />
+          <FunctionImport Name="ConsultarProductos" ReturnType="Collection(KNDataBaseModel.ConsultarProductos_Result)" />
         </EntityContainer>
         <ComplexType Name="ValidarInicioSesion_Result">
           <Property Type="Int64" Name="IdUsuario" Nullable="false" />
@@ -116,6 +131,27 @@
           <Property Type="String" Name="Contrasenna" Nullable="false" MaxLength="10" />
           <Property Type="Int32" Name="IdRol" Nullable="false" />
           <Property Type="String" Name="DescripcionRol" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <EntityType Name="TProducto">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="IdProducto" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="Precio" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="Imagen" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <ComplexType Name="ConsultarProductos_Result">
+          <Property Type="Int64" Name="IdProducto" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="1000" />
+          <Property Type="Int32" Name="Cantidad" Nullable="false" />
+          <Property Type="Decimal" Name="Precio" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Boolean" Name="Estado" Nullable="false" />
+          <Property Type="String" Name="Imagen" Nullable="false" MaxLength="255" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -154,6 +190,32 @@
                 <ScalarProperty Name="Contrasenna" ColumnName="Contrasenna" />
                 <ScalarProperty Name="IdRol" ColumnName="IdRol" />
                 <ScalarProperty Name="DescripcionRol" ColumnName="DescripcionRol" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="TProducto">
+            <EntityTypeMapping TypeName="KNDataBaseModel.TProducto">
+              <MappingFragment StoreEntitySet="TProducto">
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ConsultarProductos" FunctionName="KNDataBaseModel.Store.ConsultarProductos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KNDataBaseModel.ConsultarProductos_Result">
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

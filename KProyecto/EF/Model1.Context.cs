@@ -29,6 +29,7 @@ namespace KProyecto.EF
     
         public virtual DbSet<TRol> TRol { get; set; }
         public virtual DbSet<TUsuario> TUsuario { get; set; }
+        public virtual DbSet<TProducto> TProducto { get; set; }
     
         public virtual int RegistroUsuario(string identificacion, string nombre, string correo, string contrasenna)
         {
@@ -62,6 +63,11 @@ namespace KProyecto.EF
                 new ObjectParameter("Contrasenna", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ValidarInicioSesion_Result>("ValidarInicioSesion", correoParameter, contrasennaParameter);
+        }
+    
+        public virtual ObjectResult<ConsultarProductos_Result> ConsultarProductos()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarProductos_Result>("ConsultarProductos");
         }
     }
 }

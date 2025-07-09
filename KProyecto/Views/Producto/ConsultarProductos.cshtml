@@ -1,0 +1,40 @@
+﻿@model KProyecto.Models.Usuario
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+
+    @using (Html.BeginForm("", "", FormMethod.Post, new { @class = "form-horizontal m-t-20" }))
+    {
+        <div class="card-body">
+            <h4 class="card-title">Consula de Productos</h4>
+
+            <hr><br />
+
+            <div class="row">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-8">
+
+                    @if (!string.IsNullOrEmpty(ViewBag.Mensaje))
+                    {
+                        <div class="alert alert-warning text-center">
+                            @ViewBag.Mensaje
+                        </div>
+                    }
+
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 text-right pb-2 pr-4">
+                <button class="btn btn-lg btn-info" type="submit">Procesar</button>
+            </div>
+        </div>
+    }
+
+</div>

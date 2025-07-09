@@ -5,6 +5,13 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="KNDataBaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TRol">
+          <Key>
+            <PropertyRef Name="IdRol" />
+          </Key>
+          <Property Name="IdRol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DescripcionRol" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
         <EntityType Name="TUsuario">
           <Key>
             <PropertyRef Name="IdUsuario" />
@@ -14,7 +21,20 @@
           <Property Name="Nombre" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Correo" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Contrasenna" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="IdRol" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_TUsuario_TRol">
+          <End Role="TRol" Type="Self.TRol" Multiplicity="1" />
+          <End Role="TUsuario" Type="Self.TUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRol">
+              <PropertyRef Name="IdRol" />
+            </Principal>
+            <Dependent Role="TUsuario">
+              <PropertyRef Name="IdRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="RegistroUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Identificacion" Type="varchar" Mode="In" />
           <Parameter Name="Nombre" Type="varchar" Mode="In" />
@@ -26,13 +46,26 @@
           <Parameter Name="Contrasenna" Type="varchar" Mode="In" />
         </Function>
         <EntityContainer Name="KNDataBaseModelStoreContainer">
+          <EntitySet Name="TRol" EntityType="Self.TRol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TUsuario" EntityType="Self.TUsuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_TUsuario_TRol" Association="Self.FK_TUsuario_TRol">
+            <End Role="TRol" EntitySet="TRol" />
+            <End Role="TUsuario" EntitySet="TUsuario" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="KNDataBaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TRol">
+          <Key>
+            <PropertyRef Name="IdRol" />
+          </Key>
+          <Property Name="IdRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DescripcionRol" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TUsuario" Relationship="Self.FK_TUsuario_TRol" FromRole="TRol" ToRole="TUsuario" />
+        </EntityType>
         <EntityType Name="TUsuario">
           <Key>
             <PropertyRef Name="IdUsuario" />
@@ -42,9 +75,28 @@
           <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Contrasenna" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdRol" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TRol" Relationship="Self.FK_TUsuario_TRol" FromRole="TUsuario" ToRole="TRol" />
         </EntityType>
+        <Association Name="FK_TUsuario_TRol">
+          <End Role="TRol" Type="Self.TRol" Multiplicity="1" />
+          <End Role="TUsuario" Type="Self.TUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRol">
+              <PropertyRef Name="IdRol" />
+            </Principal>
+            <Dependent Role="TUsuario">
+              <PropertyRef Name="IdRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="KNDataBaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TRol" EntityType="Self.TRol" />
           <EntitySet Name="TUsuario" EntityType="Self.TUsuario" />
+          <AssociationSet Name="FK_TUsuario_TRol" Association="Self.FK_TUsuario_TRol">
+            <End Role="TRol" EntitySet="TRol" />
+            <End Role="TUsuario" EntitySet="TUsuario" />
+          </AssociationSet>
           <FunctionImport Name="RegistroUsuario">
             <Parameter Name="Identificacion" Mode="In" Type="String" />
             <Parameter Name="Nombre" Mode="In" Type="String" />
@@ -62,6 +114,8 @@
           <Property Type="String" Name="Nombre" Nullable="false" MaxLength="255" />
           <Property Type="String" Name="Correo" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="Contrasenna" Nullable="false" MaxLength="10" />
+          <Property Type="Int32" Name="IdRol" Nullable="false" />
+          <Property Type="String" Name="DescripcionRol" Nullable="false" MaxLength="100" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -69,6 +123,14 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="KNDataBaseModelStoreContainer" CdmEntityContainer="KNDataBaseEntities">
+          <EntitySetMapping Name="TRol">
+            <EntityTypeMapping TypeName="KNDataBaseModel.TRol">
+              <MappingFragment StoreEntitySet="TRol">
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="DescripcionRol" ColumnName="DescripcionRol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TUsuario">
             <EntityTypeMapping TypeName="KNDataBaseModel.TUsuario">
               <MappingFragment StoreEntitySet="TUsuario">
@@ -77,6 +139,7 @@
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Correo" ColumnName="Correo" />
                 <ScalarProperty Name="Contrasenna" ColumnName="Contrasenna" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -89,6 +152,8 @@
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Correo" ColumnName="Correo" />
                 <ScalarProperty Name="Contrasenna" ColumnName="Contrasenna" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="DescripcionRol" ColumnName="DescripcionRol" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -27,6 +27,7 @@ namespace KProyecto.EF
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<TRol> TRol { get; set; }
         public virtual DbSet<TUsuario> TUsuario { get; set; }
     
         public virtual int RegistroUsuario(string identificacion, string nombre, string correo, string contrasenna)

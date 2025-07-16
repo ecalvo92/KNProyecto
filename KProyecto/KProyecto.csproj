@@ -236,6 +236,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Productos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\icons\crypto-icons\cryptocoins.ttf" />
@@ -286,6 +287,7 @@
     <Content Include="Views\Usuario\ConsultarPerfilUsuario.cshtml" />
     <Content Include="Views\Usuario\CambiarContrasenna.cshtml" />
     <Content Include="Views\Producto\ConsultarProductos.cshtml" />
+    <Content Include="Views\Producto\RegistrarProducto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace KProyecto.Models
 {
@@ -28,7 +24,7 @@ namespace KProyecto.Models
         {
             var contexto = filterContext.HttpContext;
 
-            if (contexto.Session["IdRol"].ToString() != "2")
+            if (contexto.Session.Count == 0 || contexto.Session["IdRol"].ToString() != "2")
             {
                 // Redireccionarlo a la pantalla de inicio
                 filterContext.Result = new RedirectResult("~/Home/Principal");

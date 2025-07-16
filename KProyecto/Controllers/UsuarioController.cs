@@ -5,8 +5,11 @@ using System.Web.Mvc;
 
 namespace KProyecto.Controllers
 {
+    [FiltroSesion]
     public class UsuarioController : Controller
     {
+        #region Index
+
         [HttpGet]
         public ActionResult ConsultarPerfilUsuario()
         {
@@ -50,12 +53,16 @@ namespace KProyecto.Controllers
                     {
                         ViewBag.Mensaje = "Información actualizada correctamente";
                         Session["Nombre"] = usuario.Nombre;
-                    }                                  
+                    }
                 }
 
                 return View("ConsultarPerfilUsuario");
             }
         }
+
+        #endregion
+
+        #region CambiarContrasenna
 
         [HttpGet]
         public ActionResult CambiarContrasenna()
@@ -91,6 +98,8 @@ namespace KProyecto.Controllers
                 return View(usuario);
             }
         }
+
+        #endregion
 
     }
 }

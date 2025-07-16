@@ -1,9 +1,7 @@
 ﻿using KProyecto.EF;
 using KProyecto.Models;
 using KProyecto.Services;
-using System;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Web.Mvc;
 

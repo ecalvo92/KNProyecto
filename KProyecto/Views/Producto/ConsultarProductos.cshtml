@@ -13,6 +13,14 @@
         <hr><br />
 
         <div class="row">
+            <div class="col-md-12 text-right pb-2 pr-4">
+                <a class="btn btn-info" href="@Url.Action("RegistrarProducto","Producto")">Registrar</a>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
             <div class="col-md-1">
             </div>
             <div class="col-md-10">
@@ -46,19 +54,13 @@
                                 <td>@item.Cantidad</td>
                                 <td>@item.Precio</td>
                                 <td>@item.Estado</td>
-                                <td>@item.Imagen</td>
+                                <td><img src="@item.Imagen" width="175" height="125" /></td>
                             </tr>
                         }
                     </tbody>
                 </table>
 
             </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12 text-right pb-2 pr-4">
-            <button class="btn btn-lg btn-info" type="submit">Procesar</button>
         </div>
     </div>
 

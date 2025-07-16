@@ -80,6 +80,40 @@ namespace KProyecto.Controllers
                 ViewBag.Mensaje = "No se pudo registrar el producto";
                 return View();
             }
+
+
+        }
+
+        [HttpGet]
+        public ActionResult ActualizarProducto(long id)
+        {
+            return View();
+        }
+
+        //httppost
+
+
+        [HttpPost]
+        public ActionResult CambiarEstadoProducto(Producto producto)
+        {
+            using (var dbContext = new KNDataBaseEntities())
+            {
+                var result = dbContext.TProducto.FirstOrDefault(u => u.IdProducto == producto.IdProducto);
+
+                if (result != null)
+                {
+                    result.Estado = producto.Estado;
+                    var update = dbContext.SaveChanges();
+
+                    if (update > 0)
+                        return RedirectToAction("ConsultarProductos", "Producto");
+                }
+
+                ViewBag.Mensaje = "No se pudo actualizar el estado del producto producto";
+                return View();
+            }
+
+            
         }
     }
 }

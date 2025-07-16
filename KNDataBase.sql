@@ -48,7 +48,7 @@ GO
 
 SET IDENTITY_INSERT [dbo].[TProducto] ON 
 GO
-INSERT [dbo].[TProducto] ([IdProducto], [Nombre], [Descripcion], [Cantidad], [Precio], [Estado], [Imagen]) VALUES (1, N'PS 5', N'Play Station 5', 8, CAST(240000.00 AS Decimal(10, 2)), 1, N'-')
+INSERT [dbo].[TProducto] ([IdProducto], [Nombre], [Descripcion], [Cantidad], [Precio], [Estado], [Imagen]) VALUES (1, N'Ps4', N'Consola de video juegos', 5, CAST(140.00 AS Decimal(10, 2)), 1, N'/Productos/1.png')
 GO
 SET IDENTITY_INSERT [dbo].[TProducto] OFF
 GO
@@ -90,6 +90,23 @@ BEGIN
 		   Estado,
 		   Imagen
 	  FROM dbo.TProducto
+
+END
+GO
+
+CREATE PROCEDURE [dbo].[RegistroProducto]
+	@Nombre varchar(255),
+	@Descripcion varchar(1000),
+	@Cantidad int,
+	@Precio decimal(10,2),
+	@Imagen varchar(255)
+AS
+BEGIN
+
+	INSERT INTO dbo.TProducto (Nombre, Descripcion, Cantidad, Precio, Estado, Imagen)
+	VALUES (@Nombre, @Descripcion, @Cantidad, @Precio, 1, @Imagen)
+
+	SELECT SCOPE_IDENTITY() 'IdProducto'
 
 END
 GO

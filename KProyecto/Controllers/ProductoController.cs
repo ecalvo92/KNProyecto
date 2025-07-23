@@ -6,10 +6,13 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace KProyecto.Controllers
 {
+    [OutputCache(Duration = 0, Location = OutputCacheLocation.None, NoStore = true, VaryByParam = "*")]
+    [FiltroSesion]
     [FiltroAdministrador]
     public class ProductoController : Controller
     {

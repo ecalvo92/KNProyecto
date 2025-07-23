@@ -4,9 +4,11 @@ using KProyecto.Services;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
+using System.Web.UI;
 
 namespace KProyecto.Controllers
 {
+    [OutputCache(Duration = 0, Location = OutputCacheLocation.None, NoStore = true, VaryByParam = "*")]
     public class HomeController : Controller
     {
         readonly Utilitarios service = new Utilitarios();
@@ -137,11 +139,11 @@ namespace KProyecto.Controllers
             return View();
         }
 
-        [FiltroSesion]
         [HttpGet]
         public ActionResult CerrarSesion()
         {
             Session.Clear();
+            Session.Abandon();
             return RedirectToAction("Index", "Home");
         }
 

@@ -2,10 +2,12 @@
 using KProyecto.Models;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.UI;
 
 namespace KProyecto.Controllers
 {
-    [FiltroSesion]
+    [OutputCache(Duration = 0, Location = OutputCacheLocation.None, NoStore = true, VaryByParam = "*")]
+    [FiltroSesion]   
     public class UsuarioController : Controller
     {
         #region ConsultarPerfilUsuario

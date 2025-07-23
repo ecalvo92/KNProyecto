@@ -6,9 +6,9 @@ namespace KProyecto.Models
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            var contexto = filterContext.HttpContext;
+            var sesion = filterContext.HttpContext.Session;
 
-            if (contexto.Session.Count == 0)
+            if (sesion["IdUsuario"] == null)
             {
                 // Redireccionarlo a la pantalla de inicio
                 filterContext.Result = new RedirectResult("~/Home/Index");
@@ -22,9 +22,9 @@ namespace KProyecto.Models
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            var contexto = filterContext.HttpContext;
+            var sesion = filterContext.HttpContext.Session;
 
-            if (contexto.Session.Count == 0 || contexto.Session["IdRol"].ToString() != "2")
+            if (sesion["IdUsuario"] == null || sesion["IdRol"]?.ToString() != "2")
             {
                 // Redireccionarlo a la pantalla de inicio
                 filterContext.Result = new RedirectResult("~/Home/Principal");

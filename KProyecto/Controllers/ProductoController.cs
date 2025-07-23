@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 
 namespace KProyecto.Controllers
 {
@@ -15,25 +16,11 @@ namespace KProyecto.Controllers
         [HttpGet]
         public ActionResult ConsultarProductos()
         {
-            using (var dbContext = new KNDataBaseEntities())
-            {
-                var datos = new List<Producto>();
-
-                //var result = dbContext.TProducto.ToList();
-                var result = dbContext.ConsultarProductos().ToList();
-
-                //foreach (var item in result)
-                //{
-                //    var producto = new Producto
-                //    {
-                //        Nombre = item.Nombre
-                //    };
-                //    datos.Add(producto);
-                //}
-
-                return View(result);
-            }
+            var result = ConsultarDatosProductos();
+            return View(result);
         }
+
+        #region RegistrarProducto
 
         [HttpGet]
         public ActionResult RegistrarProducto()
@@ -84,14 +71,70 @@ namespace KProyecto.Controllers
 
         }
 
+        #endregion
+
+        #region ActualizarProducto
+
         [HttpGet]
         public ActionResult ActualizarProducto(long id)
         {
-            return View();
+            using (var dbContext = new KNDataBaseEntities())
+            {
+                var datos = new Producto();
+                var result = dbContext.TProducto.FirstOrDefault(p => p.IdProducto == id);
+
+                if (result != null)
+                {
+                    datos.IdProducto = result.IdProducto;
+                    datos.Nombre = result.Nombre;
+                    datos.Descripcion = result.Descripcion;
+                    datos.Cantidad = result.Cantidad;
+                    datos.Precio = result.Precio;
+                    datos.Estado = result.Estado;
+                    datos.Imagen = result.Imagen;
+                }
+
+                return View(datos);
+            }
         }
 
-        //httppost
+        [HttpPost]
+        public ActionResult ActualizarProducto(Producto producto, HttpPostedFileBase ImagenProducto)
+        {
+            using (var dbContext = new KNDataBaseEntities())
+            {
+                var result = dbContext.TProducto.FirstOrDefault(u => u.IdProducto == producto.IdProducto);
 
+                if (result != null)
+                {
+                    result.Nombre = producto.Nombre;
+                    result.Descripcion = producto.Descripcion;
+                    result.Cantidad = producto.Cantidad;
+                    result.Precio = producto.Precio;
+
+                    if (ImagenProducto != null)
+                    {
+                        System.IO.File.Delete(AppDomain.CurrentDomain.BaseDirectory + result.Imagen);
+
+                        string extension = Path.GetExtension(ImagenProducto.FileName);
+                        string ruta = AppDomain.CurrentDomain.BaseDirectory + "Productos\\" + result.IdProducto + extension;
+                        ImagenProducto.SaveAs(ruta);
+
+                        result.Imagen = "/Productos/" + result.IdProducto + extension;
+                    }
+
+                    var update = dbContext.SaveChanges();
+
+                    if (update > 0)
+                        return RedirectToAction("ConsultarProductos", "Producto");
+                }
+
+                ViewBag.Mensaje = "No se pudo actualizar el producto";
+                return View(producto);
+            }
+        }
+
+        #endregion
 
         [HttpPost]
         public ActionResult CambiarEstadoProducto(Producto producto)
@@ -109,11 +152,32 @@ namespace KProyecto.Controllers
                         return RedirectToAction("ConsultarProductos", "Producto");
                 }
 
-                ViewBag.Mensaje = "No se pudo actualizar el estado del producto producto";
-                return View();
-            }
+                var result2 = ConsultarDatosProductos();
 
-            
+                ViewBag.Mensaje = "No se pudo actualizar el estado del producto";
+                return View("ConsultarProductos", result2);
+            }            
+        }
+
+        private List<ConsultarProductos_Result> ConsultarDatosProductos()
+        {
+            using (var dbContext = new KNDataBaseEntities())
+            {
+                //var datos = new List<Producto>();
+                //var result = dbContext.TProducto.ToList();
+                var result = dbContext.ConsultarProductos().ToList();
+
+                //foreach (var item in result)
+                //{
+                //    var producto = new Producto
+                //    {
+                //        Nombre = item.Nombre
+                //    };
+                //    datos.Add(producto);
+                //}
+
+                return result;
+            }
         }
     }
 }

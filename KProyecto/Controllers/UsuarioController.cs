@@ -8,7 +8,7 @@ namespace KProyecto.Controllers
     [FiltroSesion]
     public class UsuarioController : Controller
     {
-        #region Index
+        #region ConsultarPerfilUsuario
 
         [HttpGet]
         public ActionResult ConsultarPerfilUsuario()
@@ -56,7 +56,7 @@ namespace KProyecto.Controllers
                     }
                 }
 
-                return View("ConsultarPerfilUsuario");
+                return View("ConsultarPerfilUsuario", usuario);
             }
         }
 

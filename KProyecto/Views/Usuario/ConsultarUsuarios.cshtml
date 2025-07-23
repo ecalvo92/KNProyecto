@@ -1,0 +1,109 @@
+﻿@model List<KProyecto.EF.TUsuario>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+
+
+    <div class="card-body">
+        <h4 class="card-title">Consula de Usuarios</h4>
+
+        <hr><br />
+
+        <div class="row">
+            <div class="col-md-12 text-right pb-2 pr-4">
+                <a class="btn btn-info" href="@Url.Action("RegistrarUsuario","Usuario")">Registrar</a>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-10">
+
+                @if (!string.IsNullOrEmpty(ViewBag.Mensaje))
+                {
+                    <div class="alert alert-warning text-center">
+                        @ViewBag.Mensaje
+                    </div>
+                }
+
+                <table id="TablaDatos" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Identificación</th>
+                            <th>Nombre</th>
+                            <th>Correo</th>
+                            <th>Rol</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.IdUsuario</td>
+                                <td>@item.Identificacion</td>
+                                <td>@item.Nombre</td>
+                                <td>@item.Correo</td>
+                                <td>@item.TRol.DescripcionRol</td>
+                                <td>@(item.Estado ? "Activo" : "Inactivo")</td>
+                                <td>
+                                    <button type="button" class="btn bg-transparent" data-toggle="modal" data-target="#exampleModal"
+                                            data-id="@item.IdUsuario"
+                                            data-nombre="@item.Nombre"
+                                            data-estado="@item.Estado">
+                                        <i class="fa fa-toggle-on" style="font-size:1.5em"></i>
+                                    </button>
+
+                                    <a class="btn bg-transparent" href="@Url.Action("ActualizarUsuario","Usuario", new { id = item.IdUsuario })">
+                                        <i class="fa fa-exchange" style="font-size:1.5em"></i>
+                                    </a>
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            @using (Html.BeginForm("CambiarEstadoUsuario", "Usuario", FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                <div class="modal-body">
+                    <label id="EstadoTexto" class="col-form-label"></label>
+                    <input id="IdUsuario" name="IdUsuario" type="hidden" class="form-control" />
+                    <input id="Estado" name="Estado" type="hidden" class="form-control" />
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Procesar</button>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery.min.js"></script>
+<script src="~/Scripts/Site/ConsultaUsuarios.js"></script>

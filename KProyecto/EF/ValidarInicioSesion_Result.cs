@@ -18,6 +18,7 @@ namespace KProyecto.EF
         public string Nombre { get; set; }
         public string Correo { get; set; }
         public string Contrasenna { get; set; }
+        public bool Estado { get; set; }
         public int IdRol { get; set; }
         public string DescripcionRol { get; set; }
     }

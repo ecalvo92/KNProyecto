@@ -39,6 +39,7 @@ CREATE TABLE [dbo].[TUsuario](
 	[Correo] [varchar](100) NOT NULL,
 	[Contrasenna] [varchar](10) NOT NULL,
 	[IdRol] [int] NOT NULL,
+	[Estado] [bit] NOT NULL,
  CONSTRAINT [PK_TUsuario] PRIMARY KEY CLUSTERED 
 (
 	[IdUsuario] ASC
@@ -48,7 +49,9 @@ GO
 
 SET IDENTITY_INSERT [dbo].[TProducto] ON 
 GO
-INSERT [dbo].[TProducto] ([IdProducto], [Nombre], [Descripcion], [Cantidad], [Precio], [Estado], [Imagen]) VALUES (1, N'Ps4', N'Consola de video juegos', 5, CAST(140.00 AS Decimal(10, 2)), 1, N'/Productos/1.png')
+INSERT [dbo].[TProducto] ([IdProducto], [Nombre], [Descripcion], [Cantidad], [Precio], [Estado], [Imagen]) VALUES (1, N'Ps4', N'Consola de video juegos', 5, CAST(140.00 AS Decimal(10, 2)), 0, N'/Productos/1.png')
+GO
+INSERT [dbo].[TProducto] ([IdProducto], [Nombre], [Descripcion], [Cantidad], [Precio], [Estado], [Imagen]) VALUES (2, N'Ps7', N'Producto nuevo que no ha salido', 4, CAST(1600.00 AS Decimal(10, 2)), 1, N'/Productos/2.png')
 GO
 SET IDENTITY_INSERT [dbo].[TProducto] OFF
 GO
@@ -64,9 +67,9 @@ GO
 
 SET IDENTITY_INSERT [dbo].[TUsuario] ON 
 GO
-INSERT [dbo].[TUsuario] ([IdUsuario], [Identificacion], [Nombre], [Correo], [Contrasenna], [IdRol]) VALUES (1, N'304590415', N'CALVO CASTILLO EDUARDO JOSE', N'ecalvo90415@ufide.ac.cr', N'90415', 1)
+INSERT [dbo].[TUsuario] ([IdUsuario], [Identificacion], [Nombre], [Correo], [Contrasenna], [IdRol], [Estado]) VALUES (1, N'304590415', N'CALVO CASTILLO EDUARDO JOSE', N'ecalvo90415@ufide.ac.cr', N'90415', 1, 1)
 GO
-INSERT [dbo].[TUsuario] ([IdUsuario], [Identificacion], [Nombre], [Correo], [Contrasenna], [IdRol]) VALUES (2, N'113620173', N'VILLALOBOS PICADO CARLOS HUMBERTO', N'cvillalobos20173@ufide.ac.cr', N'20173', 2)
+INSERT [dbo].[TUsuario] ([IdUsuario], [Identificacion], [Nombre], [Correo], [Contrasenna], [IdRol], [Estado]) VALUES (2, N'113620173', N'CARLOS HUMBERTO VILLALOBOS PICADO', N'cvillalobos20173@ufide.ac.cr', N'20173', 2, 1)
 GO
 SET IDENTITY_INSERT [dbo].[TUsuario] OFF
 GO
@@ -119,8 +122,8 @@ CREATE PROCEDURE [dbo].[RegistroUsuario]
 AS
 BEGIN
 
-	INSERT INTO dbo.TUsuario (Identificacion,Nombre,Correo,Contrasenna,IdRol)
-	VALUES (@Identificacion, @Nombre, @Correo, @Contrasenna, 1)
+	INSERT INTO dbo.TUsuario (Identificacion,Nombre,Correo,Contrasenna,IdRol, Estado)
+	VALUES (@Identificacion, @Nombre, @Correo, @Contrasenna, 1, 1)
 
 END
 GO
@@ -136,12 +139,14 @@ BEGIN
 			Nombre,
 			Correo,
 			Contrasenna,
+			Estado,
 			U.IdRol,
 			R.DescripcionRol
 	  FROM	dbo.TUsuario U
 	  INNER JOIN dbo.TRol R ON U.IdRol = R.IdRol
 	  WHERE Correo = @Correo
 		AND Contrasenna = @Contrasenna
+		AND Estado = 1
 
 END
 GO

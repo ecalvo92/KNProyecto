@@ -27,7 +27,8 @@ namespace KProyecto.Controllers
             using (var dbContext = new KNDataBaseEntities())
             {
                 //var result = dbContext.TUsuario.FirstOrDefault(u => u.Correo == autenticacion.Correo
-                //                                                 && u.Contrasenna == autenticacion.Contrasenna);
+                //                                                 && u.Contrasenna == autenticacion.Contrasenna
+                //                                                 && u.Estado == true);
 
                 var result = dbContext.ValidarInicioSesion(
                     autenticacion.Correo,
@@ -67,7 +68,8 @@ namespace KProyecto.Controllers
                 //    Identificacion = autenticacion.Identificacion,
                 //    Nombre = autenticacion.Nombre,
                 //    Correo = autenticacion.Correo,
-                //    Contrasenna = autenticacion.Contrasenna
+                //    Contrasenna = autenticacion.Contrasenna,
+                //    Estado = true
                 //});
 
                 //var result = dbContext.SaveChanges();

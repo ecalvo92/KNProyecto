@@ -20,6 +20,7 @@ namespace KProyecto.EF
         public string Correo { get; set; }
         public string Contrasenna { get; set; }
         public int IdRol { get; set; }
+        public bool Estado { get; set; }
     
         public virtual TRol TRol { get; set; }
     }

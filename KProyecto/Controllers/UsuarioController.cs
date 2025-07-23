@@ -1,5 +1,6 @@
 ﻿using KProyecto.EF;
 using KProyecto.Models;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.UI;
@@ -102,6 +103,47 @@ namespace KProyecto.Controllers
         }
 
         #endregion
+
+        
+        [HttpGet]
+        [FiltroAdministrador]
+        public ActionResult ConsultarUsuarios()
+        {
+            var result = ConsultarDatosUsuarios();
+            return View(result);
+        }
+
+
+        [HttpPost]
+        public ActionResult CambiarEstadoUsuario(Usuario usuario)
+        {
+            using (var dbContext = new KNDataBaseEntities())
+            {
+                var result = dbContext.TUsuario.FirstOrDefault(u => u.IdUsuario == usuario.IdUsuario);
+
+                if (result != null)
+                {
+                    result.Estado = usuario.Estado;
+                    var update = dbContext.SaveChanges();
+
+                    if (update > 0)
+                        return RedirectToAction("ConsultarUsuarios", "Usuario");
+                }
+
+                var result2 = ConsultarDatosUsuarios();
+
+                ViewBag.Mensaje = "No se pudo actualizar el estado del usuario";
+                return View("ConsultarUsuarios", result2);
+            }
+        }     
+
+        private List<TUsuario> ConsultarDatosUsuarios()
+        {
+            using (var dbContext = new KNDataBaseEntities())
+            {
+                return dbContext.TUsuario.Include("TRol").ToList();
+            }
+        }
 
     }
 }

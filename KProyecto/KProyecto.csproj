@@ -217,6 +217,7 @@
     <Content Include="Scripts\perfect-scrollbar.jquery.min.js" />
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\sidebarmenu.js" />
+    <Content Include="Scripts\Site\ConsultaUsuarios.js" />
     <Content Include="Scripts\Site\ConsultaProductos.js" />
     <Content Include="Scripts\sparkline.js" />
     <Content Include="Scripts\waves.js" />
@@ -289,6 +290,7 @@
     <Content Include="Views\Producto\ConsultarProductos.cshtml" />
     <Content Include="Views\Producto\RegistrarProducto.cshtml" />
     <Content Include="Views\Producto\ActualizarProducto.cshtml" />
+    <Content Include="Views\Usuario\ConsultarUsuarios.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -34,6 +34,7 @@
           <Property Name="Correo" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Contrasenna" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="IdRol" Type="int" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_TUsuario_TRol">
           <End Role="TRol" Type="Self.TRol" Multiplicity="1" />
@@ -109,6 +110,7 @@
           <Property Name="Correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Contrasenna" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="IdRol" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="TRol" Relationship="Self.FK_TUsuario_TRol" FromRole="TUsuario" ToRole="TRol" />
         </EntityType>
         <Association Name="FK_TUsuario_TRol">
@@ -165,6 +167,7 @@
           <Property Type="String" Name="Nombre" Nullable="false" MaxLength="255" />
           <Property Type="String" Name="Correo" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="Contrasenna" Nullable="false" MaxLength="10" />
+          <Property Type="Boolean" Name="Estado" Nullable="false" />
           <Property Type="Int32" Name="IdRol" Nullable="false" />
           <Property Type="String" Name="DescripcionRol" Nullable="false" MaxLength="100" />
         </ComplexType>
@@ -204,6 +207,7 @@
                 <ScalarProperty Name="Correo" ColumnName="Correo" />
                 <ScalarProperty Name="Contrasenna" ColumnName="Contrasenna" />
                 <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -230,6 +234,7 @@
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Correo" ColumnName="Correo" />
                 <ScalarProperty Name="Contrasenna" ColumnName="Contrasenna" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="IdRol" ColumnName="IdRol" />
                 <ScalarProperty Name="DescripcionRol" ColumnName="DescripcionRol" />
               </ComplexTypeMapping>

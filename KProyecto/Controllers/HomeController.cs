@@ -138,7 +138,8 @@ namespace KProyecto.Controllers
         [HttpGet]
         public ActionResult Principal()
         {
-            return View();
+            var result = service.ConsultarDatosProductos("Activos");
+            return View(result);
         }
 
         [HttpGet]

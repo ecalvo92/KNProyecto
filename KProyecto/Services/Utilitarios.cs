@@ -1,5 +1,8 @@
-﻿using System;
+﻿using KProyecto.EF;
+using System;
+using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
@@ -53,6 +56,33 @@ namespace KProyecto.Services
             }
 
             return sb.ToString();
+        }
+
+        public List<TProducto> ConsultarDatosProductos(string filtro)
+        {
+            using (var dbContext = new KNDataBaseEntities())
+            {
+                //var datos = new List<Producto>();
+                //var result = dbContext.TProducto.ToList();
+
+                List<TProducto> result;
+
+                if (filtro == "Todos")
+                    result = dbContext.TProducto.ToList();
+                else
+                    result = dbContext.TProducto.Where(x => x.Estado == true).ToList();
+
+                    //foreach (var item in result)
+                    //{
+                    //    var producto = new Producto
+                    //    {
+                    //        Nombre = item.Nombre
+                    //    };
+                    //    datos.Add(producto);
+                    //}
+
+                    return result;
+            }
         }
 
     }

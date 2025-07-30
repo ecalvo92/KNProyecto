@@ -1,5 +1,6 @@
 ﻿using KProyecto.EF;
 using KProyecto.Models;
+using KProyecto.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,10 +17,12 @@ namespace KProyecto.Controllers
     [FiltroAdministrador]
     public class ProductoController : Controller
     {
+        readonly Utilitarios service = new Utilitarios();
+
         [HttpGet]
         public ActionResult ConsultarProductos()
         {
-            var result = ConsultarDatosProductos();
+            var result = service.ConsultarDatosProductos("Todos");
             return View(result);
         }
 
@@ -155,32 +158,12 @@ namespace KProyecto.Controllers
                         return RedirectToAction("ConsultarProductos", "Producto");
                 }
 
-                var result2 = ConsultarDatosProductos();
+                var result2 = service.ConsultarDatosProductos("Todos");
 
                 ViewBag.Mensaje = "No se pudo actualizar el estado del producto";
                 return View("ConsultarProductos", result2);
             }            
         }
 
-        private List<ConsultarProductos_Result> ConsultarDatosProductos()
-        {
-            using (var dbContext = new KNDataBaseEntities())
-            {
-                //var datos = new List<Producto>();
-                //var result = dbContext.TProducto.ToList();
-                var result = dbContext.ConsultarProductos().ToList();
-
-                //foreach (var item in result)
-                //{
-                //    var producto = new Producto
-                //    {
-                //        Nombre = item.Nombre
-                //    };
-                //    datos.Add(producto);
-                //}
-
-                return result;
-            }
-        }
     }
 }

@@ -4,10 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="954b97b8a3f34dc38ea3db162a4d3a94" Name="Diagram1">
-        <EntityTypeShape EntityType="KNDataBaseModel.TProducto" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="KNDataBaseModel.TRol" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+      <Diagram DiagramId="164bdadd3a8942f49cfca30e4a664ab7" Name="Diagram1">
+        <EntityTypeShape EntityType="KNDataBaseModel.TCarrito" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KNDataBaseModel.TProducto" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KNDataBaseModel.TRol" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="KNDataBaseModel.TUsuario" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="KNDataBaseModel.FK_TCarrito_TProducto" ManuallyRouted="false" />
+        <AssociationConnector Association="KNDataBaseModel.FK_TCarrito_TUsuario" ManuallyRouted="false" />
         <AssociationConnector Association="KNDataBaseModel.FK_TUsuario_TRol" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

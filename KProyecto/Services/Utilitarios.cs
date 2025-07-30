@@ -62,9 +62,6 @@ namespace KProyecto.Services
         {
             using (var dbContext = new KNDataBaseEntities())
             {
-                //var datos = new List<Producto>();
-                //var result = dbContext.TProducto.ToList();
-
                 List<TProducto> result;
 
                 if (filtro == "Todos")
@@ -72,16 +69,7 @@ namespace KProyecto.Services
                 else
                     result = dbContext.TProducto.Where(x => x.Estado == true).ToList();
 
-                    //foreach (var item in result)
-                    //{
-                    //    var producto = new Producto
-                    //    {
-                    //        Nombre = item.Nombre
-                    //    };
-                    //    datos.Add(producto);
-                    //}
-
-                    return result;
+                return result;
             }
         }
 

@@ -138,8 +138,15 @@ namespace KProyecto.Controllers
         [HttpGet]
         public ActionResult Principal()
         {
-            var result = service.ConsultarDatosProductos("Activos");
-            return View(result);
+            if (Session["IdRol"].ToString() == "1")
+            {
+                var result = service.ConsultarDatosProductos("Activos");
+                return View(result);
+            }
+            else
+            {
+                return RedirectToAction("MiniDashboard", "Administracion");
+            }
         }
 
         [HttpGet]

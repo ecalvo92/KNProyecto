@@ -14,6 +14,12 @@ namespace KProyecto.EF
     
     public partial class TUsuario
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TUsuario()
+        {
+            this.TCarrito = new HashSet<TCarrito>();
+        }
+    
         public long IdUsuario { get; set; }
         public string Identificacion { get; set; }
         public string Nombre { get; set; }
@@ -22,6 +28,8 @@ namespace KProyecto.EF
         public int IdRol { get; set; }
         public bool Estado { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TCarrito> TCarrito { get; set; }
         public virtual TRol TRol { get; set; }
     }
 }

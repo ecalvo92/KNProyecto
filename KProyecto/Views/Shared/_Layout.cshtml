@@ -100,7 +100,17 @@
                         @if (idRol == "1")
                         {
                             //Usuario Regular
+                            <li class="sidebar-item">
+                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("","")" aria-expanded="false">
+                                    <i class="ti-tag"></i><span class="hide-menu">Ver mi Carrito</span>
+                                </a>
+                            </li>
 
+                            <li class="sidebar-item">
+                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("","")" aria-expanded="false">
+                                    <i class="ti-tag"></i><span class="hide-menu">Ver mis Compras</span>
+                                </a>
+                            </li>
                         }
                         else
                         {

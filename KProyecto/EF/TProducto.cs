@@ -14,6 +14,12 @@ namespace KProyecto.EF
     
     public partial class TProducto
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TProducto()
+        {
+            this.TCarrito = new HashSet<TCarrito>();
+        }
+    
         public long IdProducto { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
@@ -21,5 +27,8 @@ namespace KProyecto.EF
         public decimal Precio { get; set; }
         public bool Estado { get; set; }
         public string Imagen { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TCarrito> TCarrito { get; set; }
     }
 }

@@ -27,6 +27,7 @@ namespace KProyecto.EF
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<TCarrito> TCarrito { get; set; }
         public virtual DbSet<TProducto> TProducto { get; set; }
         public virtual DbSet<TRol> TRol { get; set; }
         public virtual DbSet<TUsuario> TUsuario { get; set; }

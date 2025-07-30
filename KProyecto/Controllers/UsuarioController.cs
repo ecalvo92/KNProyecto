@@ -125,7 +125,9 @@ namespace KProyecto.Controllers
                     result.Estado = Estado;
                     result.IdRol = IdRol;
                     var update = dbContext.SaveChanges();
-                    return Json("OK");
+
+                    if(update > 0)
+                        return Json("OK");
                 }
 
                 return Json("No se pudo actualizar el estado del usuario");

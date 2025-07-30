@@ -13,14 +13,6 @@
         <hr><br />
 
         <div class="row">
-            <div class="col-md-12 text-right pb-2 pr-4">
-                <a class="btn btn-info" href="@Url.Action("RegistrarUsuario","Usuario")">Registrar</a>
-            </div>
-        </div>
-
-        <br />
-
-        <div class="row">
             <div class="col-md-1">
             </div>
             <div class="col-md-10">
@@ -58,14 +50,10 @@
                                     <button type="button" class="btn bg-transparent" data-toggle="modal" data-target="#exampleModal"
                                             data-id="@item.IdUsuario"
                                             data-nombre="@item.Nombre"
-                                            data-estado="@item.Estado">
-                                        <i class="fa fa-toggle-on" style="font-size:1.5em"></i>
-                                    </button>
-
-                                    <a class="btn bg-transparent" href="@Url.Action("ActualizarUsuario","Usuario", new { id = item.IdUsuario })">
+                                            data-estado="@item.Estado"
+                                            data-rol="@item.IdRol">
                                         <i class="fa fa-exchange" style="font-size:1.5em"></i>
-                                    </a>
-
+                                    </button>
                                 </td>
                             </tr>
                         }
@@ -79,7 +67,7 @@
 </div>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
@@ -88,18 +76,27 @@
                 </button>
             </div>
 
-            @using (Html.BeginForm("CambiarEstadoUsuario", "Usuario", FormMethod.Post, new { @class = "form-horizontal" }))
-            {
-                <div class="modal-body">
-                    <label id="EstadoTexto" class="col-form-label"></label>
-                    <input id="IdUsuario" name="IdUsuario" type="hidden" class="form-control" />
-                    <input id="Estado" name="Estado" type="hidden" class="form-control" />
+            <div class="modal-body">
+                <input id="IdUsuario" name="IdUsuario" type="hidden" class="form-control" />
 
+                <label id="Texto" class="col-form-label"></label>
+
+                <div class="row mt-3">
+                    <div class="col-6">
+                        <Label>Estado</Label>
+                        @Html.DropDownList("Estado", ViewBag.Estados as List<SelectListItem>, new { @class = "form-control" })
+                    </div>
+
+                    <div class="col-6">
+                        <Label>Rol</Label>
+                        @Html.DropDownList("Rol", ViewBag.Roles as List<SelectListItem>, new { @class = "form-control" })
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Procesar</button>
-                </div>
-            }
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnCambiarDatosUsuario" class="btn btn-primary">Procesar</button>
+            </div>
 
         </div>
     </div>

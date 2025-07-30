@@ -113,27 +113,22 @@ namespace KProyecto.Controllers
             return View(result);
         }
 
-
         [HttpPost]
-        public ActionResult CambiarEstadoUsuario(Usuario usuario)
+        public ActionResult CambiarDatosUsuario(long IdUsuario, bool Estado, int IdRol)
         {
             using (var dbContext = new KNDataBaseEntities())
             {
-                var result = dbContext.TUsuario.FirstOrDefault(u => u.IdUsuario == usuario.IdUsuario);
+                var result = dbContext.TUsuario.FirstOrDefault(u => u.IdUsuario == IdUsuario);
 
                 if (result != null)
                 {
-                    result.Estado = usuario.Estado;
+                    result.Estado = Estado;
+                    result.IdRol = IdRol;
                     var update = dbContext.SaveChanges();
-
-                    if (update > 0)
-                        return RedirectToAction("ConsultarUsuarios", "Usuario");
+                    return Json("OK");
                 }
 
-                var result2 = ConsultarDatosUsuarios();
-
-                ViewBag.Mensaje = "No se pudo actualizar el estado del usuario";
-                return View("ConsultarUsuarios", result2);
+                return Json("No se pudo actualizar el estado del usuario");
             }
         }     
 
@@ -141,6 +136,14 @@ namespace KProyecto.Controllers
         {
             using (var dbContext = new KNDataBaseEntities())
             {
+
+                ViewBag.Estados = new List<SelectListItem>{
+                    new SelectListItem{ Value = "1", Text = "Activo" },
+                    new SelectListItem{ Value = "0", Text = "Inactivo" },
+                };
+
+                ViewBag.Roles = dbContext.TRol.Select(r => new SelectListItem { Value = r.IdRol.ToString(), Text = r.DescripcionRol}).ToList();
+
                 return dbContext.TUsuario.Include("TRol").ToList();
             }
         }

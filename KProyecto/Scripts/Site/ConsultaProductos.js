@@ -1,4 +1,4 @@
-﻿$(document).ready(function () {
+﻿$(function () {
 
   $('#exampleModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget);

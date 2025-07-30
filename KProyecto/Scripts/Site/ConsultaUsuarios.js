@@ -1,30 +1,48 @@
-﻿$(document).ready(function () {
+﻿$(function () {
 
   $('#exampleModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget);
+
     var id = button.data('id');
     var nombre = button.data('nombre'); 
-    var estado = button.data('estado');
-    var estadoTexto = "";
+    var texto = "¿Desea actualizar la información del usuario " + nombre + "?";
 
-    if (estado == "True") {
-      estado = false;
-      estadoTexto = "¿Desea inactivar el usuario " + nombre + "?";
-    }
-    else {
-      estado = true;
-      estadoTexto = "¿Desea activar el usuario " + nombre + "?";
-    }
-
+    var estado = button.data('estado'); 
+    var rol = button.data('rol'); 
+   
     $("#IdUsuario").val(id);
-    $("#Nombre").val(nombre);
-    $("#Estado").val(estado);
-    $("#EstadoTexto").text(estadoTexto);
+    $("#Texto").text(texto);
+    $("#Estado").val(estado === 'True' ? '1' : '0');
+    $("#Rol").val(rol);
   })
 
-  var table = new DataTable('#TablaDatos', {
+  new DataTable('#TablaDatos', {
     language: {
       url: 'https://cdn.datatables.net/plug-ins/2.3.2/i18n/es-ES.json',
     },
   });
+
+  $("#btnCambiarDatosUsuario").on("click", function() {
+    $.ajax({
+      "url": "/Usuario/CambiarDatosUsuario",
+      "type": "POST",
+      "dataType": "json",
+      data: {
+        IdUsuario: $("#IdUsuario").val(),
+        Estado: $("#Estado").val() === '1' ? true : false,
+        IdRol: $("#Rol").val()
+      },
+      success: function (response) {
+
+        if (response == "OK") {
+          location.reload();
+        } else {
+          alert(response);
+        }
+
+      },
+    });
+
+  });
+
 });

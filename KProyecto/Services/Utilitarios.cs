@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
+using System.Web;
 
 namespace KProyecto.Services
 {
@@ -70,6 +71,21 @@ namespace KProyecto.Services
                     result = dbContext.TProducto.Where(x => x.Estado == true).ToList();
 
                 return result;
+            }
+        }
+
+        public List<TCarrito> ConsultarDatosCarrito()
+        {
+            var IdUsuario = long.Parse(HttpContext.Current.Session["IdUsuario"].ToString());
+            using (var dbContext = new KNDataBaseEntities())
+            {
+                var carrito = dbContext.TCarrito.Include("TProducto")
+                    .Where(x => x.IdUsuario == IdUsuario).ToList();
+
+                HttpContext.Current.Session["TotalCarrito"] = carrito.Sum(x => x.Cantidad * x.TProducto.Precio) * 1.13M;
+                HttpContext.Current.Session["CantidadCarrito"] = carrito.Sum(x => x.Cantidad);
+
+                return carrito;
             }
         }
 

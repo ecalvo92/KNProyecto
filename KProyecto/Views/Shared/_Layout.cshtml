@@ -19,6 +19,16 @@
         var nombre = Session["Nombre"].ToString();
         var idRol = Session["IdRol"].ToString();
         var descripcionRol = Session["DescripcionRol"].ToString();
+
+        var total = "0.00";
+        var cantidad = "0";
+
+        if(Session["TotalCarrito"] != null && Session["TotalCarrito"].ToString() != "0.00")
+        {
+            total = decimal.Parse(Session["TotalCarrito"].ToString()).ToString("N2");
+            cantidad = Session["CantidadCarrito"].ToString();
+        }
+
     }
 
     <div id="main-wrapper">
@@ -56,7 +66,11 @@
                     <ul class="navbar-nav float-left mr-auto">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="m-l-5 font-medium d-none d-sm-inline-block"> @descripcionRol</span>
+                                <span class="m-l-5 font-medium d-none d-sm-inline-block"></span>
+
+                                <i class="fa fa-shopping-cart mr-2"></i>@total + IVAI
+                                <i class="fa fa-tags mr-2 ml-2"></i>@cantidad
+
                             </a>
                         </li>
                     </ul>
@@ -101,7 +115,7 @@
                         {
                             //Usuario Regular
                             <li class="sidebar-item">
-                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("","")" aria-expanded="false">
+                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("ConsultarCarrito","Carrito")" aria-expanded="false">
                                     <i class="ti-tag"></i><span class="hide-menu">Ver mi Carrito</span>
                                 </a>
                             </li>
@@ -128,6 +142,11 @@
                             </li>
                         }
 
+                        <li class="nav-small-cap">
+                            <i class="mdi mdi-lock"></i>
+                            <span class="hide-menu">Rol: @descripcionRol</span>
+                        </li>
+                        
                     </ul>
                 </nav>
             </div>

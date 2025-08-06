@@ -1,10 +1,12 @@
 ﻿using KProyecto.EF;
 using KProyecto.Models;
+using KProyecto.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 using System.Web.UI;
 
 namespace KProyecto.Controllers
@@ -13,6 +15,7 @@ namespace KProyecto.Controllers
     [FiltroSesion]
     public class CarritoController : Controller
     {
+        readonly Utilitarios service = new Utilitarios();
 
         [HttpPost]
         public ActionResult AgregarCarrito(long IdProducto)
@@ -40,11 +43,22 @@ namespace KProyecto.Controllers
                 }
 
                 var transaccion = dbContext.SaveChanges();
-                if(transaccion > 0)
-                   return Json("OK");
+
+                if (transaccion > 0)
+                {
+                    service.ConsultarDatosCarrito();
+                    return Json("OK");
+                }
 
                 return Json("No se pudo actualizar su carrito");
             }
+        }
+
+        [HttpGet]
+        public ActionResult ConsultarCarrito()
+        {
+            var result = service.ConsultarDatosCarrito();
+            return View(result);
         }
 
     }

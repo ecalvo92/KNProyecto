@@ -4,13 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="164bdadd3a8942f49cfca30e4a664ab7" Name="Diagram1">
-        <EntityTypeShape EntityType="KNDataBaseModel.TCarrito" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="KNDataBaseModel.TProducto" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="KNDataBaseModel.TRol" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="KNDataBaseModel.TUsuario" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+      <Diagram DiagramId="206a4c9c5f0244afab4ff5e91783414a" Name="Diagram1">
+        <EntityTypeShape EntityType="KNDataBaseModel.TCarrito" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KNDataBaseModel.TDetalle" Width="1.5" PointX="7.5" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KNDataBaseModel.TMaestro" Width="1.5" PointX="5.25" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KNDataBaseModel.TProducto" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KNDataBaseModel.TRol" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KNDataBaseModel.TUsuario" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
         <AssociationConnector Association="KNDataBaseModel.FK_TCarrito_TProducto" ManuallyRouted="false" />
         <AssociationConnector Association="KNDataBaseModel.FK_TCarrito_TUsuario" ManuallyRouted="false" />
+        <AssociationConnector Association="KNDataBaseModel.FK_tDetalle_TMaestro" ManuallyRouted="false" />
+        <AssociationConnector Association="KNDataBaseModel.FK_tDetalle_TProducto" ManuallyRouted="false" />
+        <AssociationConnector Association="KNDataBaseModel.FK_TMaestro_TUsuario" ManuallyRouted="false" />
         <AssociationConnector Association="KNDataBaseModel.FK_TUsuario_TRol" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

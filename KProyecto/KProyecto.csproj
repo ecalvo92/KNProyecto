@@ -154,6 +154,12 @@
     <Compile Include="EF\TCarrito.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="EF\TDetalle.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\TMaestro.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="EF\TProducto.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

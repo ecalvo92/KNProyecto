@@ -35,7 +35,27 @@
 
       },
     });
-
   });  
+
+  $("#btnProcesarPago").on("click", function () {
+    $.ajax({
+      "url": "/Carrito/ProcesarPago",
+      "type": "POST",
+      "dataType": "json",
+      data: {
+
+      },
+      success: function (response) {
+
+        if (response == "OK") {
+          location.reload(); //Ver mis compras
+        } else {
+          alert(response);
+        }
+
+      },
+    });
+  });  
+  
 
 });

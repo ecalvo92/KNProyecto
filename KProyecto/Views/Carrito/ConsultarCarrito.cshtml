@@ -48,7 +48,7 @@
                             <tr>
                                 <td>@item.IdCarrito</td>
                                 <td>@item.IdProducto - @item.TProducto.Nombre</td>
-                                <td>@item.TProducto.Precio</td>
+                                <td>$ @item.TProducto.Precio.ToString("N2")</td>
                                 <td>@item.Cantidad</td>
                                 <td>$ @subtotal.ToString("N2")</td>
                                 <td>$ @impuesto.ToString("N2")</td>
@@ -73,7 +73,7 @@
                             <p class="mt-2" style="font-size:12pt">El monto a cancelar es de: <b>$ @decimal.Parse(Session["TotalCarrito"].ToString()).ToString("N2") </b></p>
                         </div>
                         <div class="col-9">
-                            <input type="button" value="Procesar Pago" class="btn btn-primary">
+                            <input type="button" id="btnProcesarPago" value="Procesar Pago" class="btn btn-primary">
                         </div>
                     </div>
                 }

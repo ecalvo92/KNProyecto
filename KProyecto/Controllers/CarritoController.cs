@@ -87,7 +87,25 @@ namespace KProyecto.Controllers
 
                 return Json("No se pudo eliminar el producto de su carrito");
             }
-        }        
+        }
 
+        [HttpPost]
+        public ActionResult ProcesarPago()
+        {
+            using (var dbContext = new KNDataBaseEntities())
+            {
+                var IdUsuario = long.Parse(Session["IdUsuario"].ToString());
+                var result = dbContext.ProcesarPago(IdUsuario);
+
+                if (result > 0)
+                {
+                     return Json("OK");
+                }
+
+                return Json("No se pudo realizar el pago de su carrito");
+            }
+        }
+
+        
     }
 }

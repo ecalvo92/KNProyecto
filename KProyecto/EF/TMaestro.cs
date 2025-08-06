@@ -12,26 +12,21 @@ namespace KProyecto.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class TProducto
+    public partial class TMaestro
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TProducto()
+        public TMaestro()
         {
-            this.TCarrito = new HashSet<TCarrito>();
             this.TDetalle = new HashSet<TDetalle>();
         }
     
-        public long IdProducto { get; set; }
-        public string Nombre { get; set; }
-        public string Descripcion { get; set; }
-        public int Cantidad { get; set; }
-        public decimal Precio { get; set; }
-        public bool Estado { get; set; }
-        public string Imagen { get; set; }
+        public long IdMaestro { get; set; }
+        public long IdUsuario { get; set; }
+        public System.DateTime FechaCompra { get; set; }
+        public decimal TotalPagado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TCarrito> TCarrito { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TDetalle> TDetalle { get; set; }
+        public virtual TUsuario TUsuario { get; set; }
     }
 }

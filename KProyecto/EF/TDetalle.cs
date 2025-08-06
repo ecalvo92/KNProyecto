@@ -12,15 +12,18 @@ namespace KProyecto.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class TCarrito
+    public partial class TDetalle
     {
-        public long IdCarrito { get; set; }
-        public long IdUsuario { get; set; }
+        public long IdDetalle { get; set; }
+        public long IdMaestro { get; set; }
         public long IdProducto { get; set; }
+        public decimal Precio { get; set; }
         public int Cantidad { get; set; }
-        public System.DateTime FechaCarrito { get; set; }
+        public decimal SubTotal { get; set; }
+        public decimal Impuesto { get; set; }
+        public decimal Total { get; set; }
     
+        public virtual TMaestro TMaestro { get; set; }
         public virtual TProducto TProducto { get; set; }
-        public virtual TUsuario TUsuario { get; set; }
     }
 }

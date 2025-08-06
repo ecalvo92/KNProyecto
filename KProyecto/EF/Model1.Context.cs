@@ -28,6 +28,8 @@ namespace KProyecto.EF
         }
     
         public virtual DbSet<TCarrito> TCarrito { get; set; }
+        public virtual DbSet<TDetalle> TDetalle { get; set; }
+        public virtual DbSet<TMaestro> TMaestro { get; set; }
         public virtual DbSet<TProducto> TProducto { get; set; }
         public virtual DbSet<TRol> TRol { get; set; }
         public virtual DbSet<TUsuario> TUsuario { get; set; }
@@ -35,6 +37,15 @@ namespace KProyecto.EF
         public virtual ObjectResult<ConsultarProductos_Result> ConsultarProductos()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarProductos_Result>("ConsultarProductos");
+        }
+    
+        public virtual int ProcesarPago(Nullable<long> idUsuario)
+        {
+            var idUsuarioParameter = idUsuario.HasValue ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ProcesarPago", idUsuarioParameter);
         }
     
         public virtual ObjectResult<Nullable<decimal>> RegistroProducto(string nombre, string descripcion, Nullable<int> cantidad, Nullable<decimal> precio, string imagen)

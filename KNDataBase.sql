@@ -20,6 +20,34 @@ CREATE TABLE [dbo].[TCarrito](
 ) ON [PRIMARY]
 GO
 
+CREATE TABLE [dbo].[TDetalle](
+	[IdDetalle] [bigint] IDENTITY(1,1) NOT NULL,
+	[IdMaestro] [bigint] NOT NULL,
+	[IdProducto] [bigint] NOT NULL,
+	[Precio] [decimal](18, 2) NOT NULL,
+	[Cantidad] [int] NOT NULL,
+	[SubTotal] [decimal](18, 2) NOT NULL,
+	[Impuesto] [decimal](18, 2) NOT NULL,
+	[Total] [decimal](18, 2) NOT NULL,
+ CONSTRAINT [PK_tDetalle] PRIMARY KEY CLUSTERED 
+(
+	[IdDetalle] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[TMaestro](
+	[IdMaestro] [bigint] IDENTITY(1,1) NOT NULL,
+	[IdUsuario] [bigint] NOT NULL,
+	[FechaCompra] [datetime] NOT NULL,
+	[TotalPagado] [decimal](18, 2) NOT NULL,
+ CONSTRAINT [PK_TMaestro] PRIMARY KEY CLUSTERED 
+(
+	[IdMaestro] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
 CREATE TABLE [dbo].[TProducto](
 	[IdProducto] [bigint] IDENTITY(1,1) NOT NULL,
 	[Nombre] [varchar](255) NOT NULL,
@@ -60,24 +88,33 @@ CREATE TABLE [dbo].[TUsuario](
 ) ON [PRIMARY]
 GO
 
-SET IDENTITY_INSERT [dbo].[TCarrito] ON 
+SET IDENTITY_INSERT [dbo].[TDetalle] ON 
 GO
-INSERT [dbo].[TCarrito] ([IdCarrito], [IdUsuario], [IdProducto], [Cantidad], [FechaCarrito]) VALUES (1, 2, 1, 5, CAST(N'2025-07-29T20:40:10.243' AS DateTime))
+INSERT [dbo].[TDetalle] ([IdDetalle], [IdMaestro], [IdProducto], [Precio], [Cantidad], [SubTotal], [Impuesto], [Total]) VALUES (1, 1, 2, CAST(1600.00 AS Decimal(18, 2)), 2, CAST(3200.00 AS Decimal(18, 2)), CAST(416.00 AS Decimal(18, 2)), CAST(3616.00 AS Decimal(18, 2)))
 GO
-INSERT [dbo].[TCarrito] ([IdCarrito], [IdUsuario], [IdProducto], [Cantidad], [FechaCarrito]) VALUES (2, 2, 2, 1, CAST(N'2025-07-29T20:40:19.043' AS DateTime))
+INSERT [dbo].[TDetalle] ([IdDetalle], [IdMaestro], [IdProducto], [Precio], [Cantidad], [SubTotal], [Impuesto], [Total]) VALUES (2, 1, 1, CAST(140.00 AS Decimal(18, 2)), 1, CAST(140.00 AS Decimal(18, 2)), CAST(18.20 AS Decimal(18, 2)), CAST(158.20 AS Decimal(18, 2)))
 GO
-INSERT [dbo].[TCarrito] ([IdCarrito], [IdUsuario], [IdProducto], [Cantidad], [FechaCarrito]) VALUES (3, 2, 3, 2, CAST(N'2025-07-29T20:40:21.030' AS DateTime))
+INSERT [dbo].[TDetalle] ([IdDetalle], [IdMaestro], [IdProducto], [Precio], [Cantidad], [SubTotal], [Impuesto], [Total]) VALUES (3, 2, 3, CAST(1900.00 AS Decimal(18, 2)), 3, CAST(5700.00 AS Decimal(18, 2)), CAST(741.00 AS Decimal(18, 2)), CAST(6441.00 AS Decimal(18, 2)))
 GO
-SET IDENTITY_INSERT [dbo].[TCarrito] OFF
+SET IDENTITY_INSERT [dbo].[TDetalle] OFF
+GO
+
+SET IDENTITY_INSERT [dbo].[TMaestro] ON 
+GO
+INSERT [dbo].[TMaestro] ([IdMaestro], [IdUsuario], [FechaCompra], [TotalPagado]) VALUES (1, 2, CAST(N'2025-08-05T20:55:47.913' AS DateTime), CAST(3774.20 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[TMaestro] ([IdMaestro], [IdUsuario], [FechaCompra], [TotalPagado]) VALUES (2, 2, CAST(N'2025-08-05T20:57:28.037' AS DateTime), CAST(6441.00 AS Decimal(18, 2)))
+GO
+SET IDENTITY_INSERT [dbo].[TMaestro] OFF
 GO
 
 SET IDENTITY_INSERT [dbo].[TProducto] ON 
 GO
-INSERT [dbo].[TProducto] ([IdProducto], [Nombre], [Descripcion], [Cantidad], [Precio], [Estado], [Imagen]) VALUES (1, N'Ps4', N'Consola de video juegos', 5, CAST(140.00 AS Decimal(10, 2)), 1, N'/Productos/1.png')
+INSERT [dbo].[TProducto] ([IdProducto], [Nombre], [Descripcion], [Cantidad], [Precio], [Estado], [Imagen]) VALUES (1, N'Ps4', N'Consola de video juegos', 4, CAST(140.00 AS Decimal(10, 2)), 1, N'/Productos/1.png')
 GO
-INSERT [dbo].[TProducto] ([IdProducto], [Nombre], [Descripcion], [Cantidad], [Precio], [Estado], [Imagen]) VALUES (2, N'Ps7', N'Producto nuevo que no ha salido', 4, CAST(1600.00 AS Decimal(10, 2)), 1, N'/Productos/2.png')
+INSERT [dbo].[TProducto] ([IdProducto], [Nombre], [Descripcion], [Cantidad], [Precio], [Estado], [Imagen]) VALUES (2, N'Ps7', N'Producto nuevo que no ha salido', 2, CAST(1600.00 AS Decimal(10, 2)), 1, N'/Productos/2.png')
 GO
-INSERT [dbo].[TProducto] ([IdProducto], [Nombre], [Descripcion], [Cantidad], [Precio], [Estado], [Imagen]) VALUES (3, N'Ps 10', N'Play nuevo', 9, CAST(1900.00 AS Decimal(10, 2)), 1, N'/Productos/3.png')
+INSERT [dbo].[TProducto] ([IdProducto], [Nombre], [Descripcion], [Cantidad], [Precio], [Estado], [Imagen]) VALUES (3, N'Ps 10', N'Play nuevo', 6, CAST(1900.00 AS Decimal(10, 2)), 1, N'/Productos/3.png')
 GO
 SET IDENTITY_INSERT [dbo].[TProducto] OFF
 GO
@@ -112,6 +149,24 @@ GO
 ALTER TABLE [dbo].[TCarrito] CHECK CONSTRAINT [FK_TCarrito_TUsuario]
 GO
 
+ALTER TABLE [dbo].[TDetalle]  WITH CHECK ADD  CONSTRAINT [FK_tDetalle_TMaestro] FOREIGN KEY([IdMaestro])
+REFERENCES [dbo].[TMaestro] ([IdMaestro])
+GO
+ALTER TABLE [dbo].[TDetalle] CHECK CONSTRAINT [FK_tDetalle_TMaestro]
+GO
+
+ALTER TABLE [dbo].[TDetalle]  WITH CHECK ADD  CONSTRAINT [FK_tDetalle_TProducto] FOREIGN KEY([IdProducto])
+REFERENCES [dbo].[TProducto] ([IdProducto])
+GO
+ALTER TABLE [dbo].[TDetalle] CHECK CONSTRAINT [FK_tDetalle_TProducto]
+GO
+
+ALTER TABLE [dbo].[TMaestro]  WITH CHECK ADD  CONSTRAINT [FK_TMaestro_TUsuario] FOREIGN KEY([IdUsuario])
+REFERENCES [dbo].[TUsuario] ([IdUsuario])
+GO
+ALTER TABLE [dbo].[TMaestro] CHECK CONSTRAINT [FK_TMaestro_TUsuario]
+GO
+
 ALTER TABLE [dbo].[TUsuario]  WITH CHECK ADD  CONSTRAINT [FK_TUsuario_TRol] FOREIGN KEY([IdRol])
 REFERENCES [dbo].[TRol] ([IdRol])
 GO
@@ -131,6 +186,46 @@ BEGIN
 		   Estado,
 		   Imagen
 	  FROM dbo.TProducto
+
+END
+GO
+
+CREATE PROCEDURE [dbo].[ProcesarPago]
+	@IdUsuario BIGINT
+AS
+BEGIN
+	
+	--MAESTRO
+	INSERT	INTO dbo.TMaestro(IdUsuario,FechaCompra,TotalPagado)
+	SELECT	C.IdUsuario, GETDATE(), SUM((C.Cantidad * P.Precio) * 1.13)
+	FROM	dbo.TCarrito C
+	INNER	JOIN dbo.TProducto P ON C.IdProducto = P.IdProducto
+	WHERE	IdUsuario = @IdUsuario
+	GROUP BY C.IdUsuario
+ 
+	--# FACTURA
+	DECLARE @IdMaestro BIGINT = SCOPE_IDENTITY()
+
+	--DETALLE
+	INSERT INTO dbo.TDetalle(IdMaestro,IdProducto,Precio,Cantidad,SubTotal,Impuesto,Total)
+	SELECT	@IdMaestro, C.IdProducto, P.Precio, C.Cantidad, 
+			(P.Precio * C.Cantidad),
+			(P.Precio * C.Cantidad) * 0.13,
+			(P.Precio * C.Cantidad) * 1.13
+	FROM	dbo.TCarrito C
+	INNER	JOIN dbo.TProducto P ON C.IdProducto = P.IdProducto
+	WHERE	IdUsuario = @IdUsuario
+
+	--REBAJA DEL INVENTARIO
+	UPDATE	P
+	SET		P.Cantidad = P.Cantidad - C.Cantidad
+	FROM	TProducto P
+	INNER	JOIN TCarrito C ON P.IdProducto = C.IdProducto
+	WHERE	IdUsuario = @IdUsuario
+
+	--LIMPIAR CARRITO
+	DELETE FROM TCarrito
+	WHERE IdUsuario = @IdUsuario
 
 END
 GO

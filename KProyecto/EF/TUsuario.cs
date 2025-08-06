@@ -18,6 +18,7 @@ namespace KProyecto.EF
         public TUsuario()
         {
             this.TCarrito = new HashSet<TCarrito>();
+            this.TMaestro = new HashSet<TMaestro>();
         }
     
         public long IdUsuario { get; set; }
@@ -30,6 +31,8 @@ namespace KProyecto.EF
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TCarrito> TCarrito { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TMaestro> TMaestro { get; set; }
         public virtual TRol TRol { get; set; }
     }
 }

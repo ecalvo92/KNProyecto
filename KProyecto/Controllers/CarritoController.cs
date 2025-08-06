@@ -23,7 +23,8 @@ namespace KProyecto.Controllers
             using (var dbContext = new KNDataBaseEntities())
             {
                 var IdUsuario = long.Parse(Session["IdUsuario"].ToString());
-                var result = dbContext.TCarrito.FirstOrDefault(u => u.IdProducto == IdProducto
+                var result = dbContext.TCarrito.Include("TProducto")
+                    .FirstOrDefault(u => u.IdProducto == IdProducto
                                                                  && u.IdUsuario == IdUsuario);
 
                 if (result == null)
@@ -38,8 +39,15 @@ namespace KProyecto.Controllers
                 }
                 else
                 {
-                    result.Cantidad += 1;
-                    result.FechaCarrito = DateTime.Now;
+                    if (result.Cantidad + 1 <= result.TProducto.Cantidad)
+                    {
+                        result.Cantidad += 1;
+                        result.FechaCarrito = DateTime.Now;
+                    }
+                    else
+                    {
+                        return Json($"Supera el límite establecido en el inventario. Unidades disponibles {result.TProducto.Cantidad}");
+                    }
                 }
 
                 var transaccion = dbContext.SaveChanges();
@@ -60,6 +68,26 @@ namespace KProyecto.Controllers
             var result = service.ConsultarDatosCarrito();
             return View(result);
         }
+
+        [HttpPost]
+        public ActionResult EliminarProductoCarrito(long IdCarrito)
+        {
+            using (var dbContext = new KNDataBaseEntities())
+            {
+                var result = dbContext.TCarrito.FirstOrDefault(u => u.IdCarrito == IdCarrito);
+
+                if (result != null)
+                {
+                    dbContext.TCarrito.Remove(result);
+                    var delete = dbContext.SaveChanges();
+
+                    if (delete > 0)
+                        return Json("OK");
+                }
+
+                return Json("No se pudo eliminar el producto de su carrito");
+            }
+        }        
 
     }
 }

@@ -56,7 +56,8 @@
                                 <td>@item.FechaCarrito.ToString("dd/MM/yyyy")</td>
                                 <td>
                                     <button type="button" class="btn bg-transparent" data-toggle="modal" data-target="#exampleModal"
-                                            data-id="@item.IdUsuario">
+                                            data-id="@item.IdCarrito"
+                                            data-nombre="@item.TProducto.Nombre">
                                         <i class="fa fa-trash" style="font-size:1.5em"></i>
                                     </button>
                                 </td>
@@ -94,15 +95,11 @@
             </div>
 
             <div class="modal-body">
-                <input id="IdUsuario" name="IdUsuario" type="hidden" class="form-control" />
-
+                <input id="IdCarrito" name="IdCarrito" type="hidden" class="form-control" />
                 <label id="Texto" class="col-form-label"></label>
-
-               
-
             </div>
             <div class="modal-footer">
-                <button type="button" id="btnCambiarDatosUsuario" class="btn btn-primary">Procesar</button>
+                <button type="button" id="btnEliminarProductoCarrito" class="btn btn-primary">Procesar</button>
             </div>
 
         </div>
@@ -110,4 +107,4 @@
 </div>
 
 <script src="~/Scripts/jquery.min.js"></script>
-<script src="~/Scripts/Site/ConsultaUsuarios.js"></script>
+<script src="~/Scripts/Site/ConsultaCarrito.js"></script>

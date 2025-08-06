@@ -222,6 +222,7 @@
     <Content Include="Scripts\perfect-scrollbar.jquery.min.js" />
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\sidebarmenu.js" />
+    <Content Include="Scripts\Site\ConsultaCarrito.js" />
     <Content Include="Scripts\Site\ConsultaUsuarios.js" />
     <Content Include="Scripts\Site\ConsultaProductos.js" />
     <Content Include="Scripts\Site\PantallaPrincipal.js" />

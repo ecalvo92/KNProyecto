@@ -306,6 +306,8 @@
     <Content Include="Views\Usuario\ConsultarUsuarios.cshtml" />
     <Content Include="Views\Administracion\MiniDashboard.cshtml" />
     <Content Include="Views\Carrito\ConsultarCarrito.cshtml" />
+    <Content Include="Views\Carrito\ConsultarFacturas.cshtml" />
+    <Content Include="Views\Carrito\ConsultarDetalleFactura.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

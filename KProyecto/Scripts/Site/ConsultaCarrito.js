@@ -6,7 +6,7 @@
     var nombre = button.data('nombre');
     var texto = "¿Desea eliminar el producto " + nombre + " de su carrito?";
 
-    $("#IdCarrito").val(id);
+    $("#IdProducto").val(id);
     $("#Texto").text(texto);
   })
 
@@ -23,7 +23,7 @@
       "type": "POST",
       "dataType": "json",
       data: {
-        IdCarrito: $("#IdCarrito").val()
+        IdProducto: $("#IdProducto").val()
       },
       success: function (response) {
 
@@ -48,7 +48,7 @@
       success: function (response) {
 
         if (response == "OK") {
-          location.reload(); //Ver mis compras
+          window.location.href = "/Carrito/ConsultarFacturas"
         } else {
           alert(response);
         }

@@ -1,0 +1,66 @@
+﻿@model List<KProyecto.EF.TMaestro>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+
+
+    <div class="card-body">
+        <h4 class="card-title">Mis Compras</h4>
+
+        <hr><br />
+
+        <div class="row">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-10">
+
+                @if (!string.IsNullOrEmpty(ViewBag.Mensaje))
+                {
+                    <div class="alert alert-warning text-center">
+                        @ViewBag.Mensaje
+                    </div>
+                }
+
+                <table id="TablaDatos" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Fecha Compra</th>
+                            <th>Artículos</th>
+                            <th>SubTotal</th>
+                            <th>Impuestos</th>
+                            <th>Total</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                           <tr>
+                               <td>@item.IdMaestro</td>
+                               <td>@item.FechaCompra.ToString("dd/MM/yyyy")</td>
+                               <td>@item.TDetalle.Sum(x => x.Cantidad)</td>
+                               <td>$ @item.TDetalle.Sum(x => x.SubTotal).ToString("N2")</td>
+                               <td>$ @item.TDetalle.Sum(x => x.Impuesto).ToString("N2")</td>
+                               <td>$ @item.TDetalle.Sum(x => x.Total).ToString("N2")</td>
+                               <td>
+                                   <a class="btn bg-transparent" href="@Url.Action("ConsultarDetalleFactura","Carrito", new { id = item.IdMaestro })">
+                                       <i class="fa fa-check" style="font-size:1.5em"></i>
+                                   </a>
+                               </td>
+                           </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="~/Scripts/jquery.min.js"></script>
+<script src="~/Scripts/Site/ConsultaCarrito.js"></script>

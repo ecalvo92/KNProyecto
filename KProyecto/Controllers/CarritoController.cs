@@ -70,11 +70,13 @@ namespace KProyecto.Controllers
         }
 
         [HttpPost]
-        public ActionResult EliminarProductoCarrito(long IdCarrito)
+        public ActionResult EliminarProductoCarrito(long IdProducto)
         {
             using (var dbContext = new KNDataBaseEntities())
             {
-                var result = dbContext.TCarrito.FirstOrDefault(u => u.IdCarrito == IdCarrito);
+                var IdUsuario = long.Parse(Session["IdUsuario"].ToString());
+                var result = dbContext.TCarrito.FirstOrDefault(u => u.IdProducto == IdProducto
+                                                                 && u.IdUsuario == IdUsuario);
 
                 if (result != null)
                 {
@@ -99,13 +101,27 @@ namespace KProyecto.Controllers
 
                 if (result > 0)
                 {
-                     return Json("OK");
+                    service.ConsultarDatosCarrito();
+                    return Json("OK");
                 }
 
                 return Json("No se pudo realizar el pago de su carrito");
             }
         }
 
-        
+        [HttpGet]
+        public ActionResult ConsultarFacturas()
+        {
+            var result = service.ConsultarDatosFacturas();
+            return View(result);
+        }
+
+        [HttpGet]
+        public ActionResult ConsultarDetalleFactura(long id)
+        {
+            var result = service.ConsultarDatosDetalleFactura(id);
+            return View(result);
+        }
+
     }
 }

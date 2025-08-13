@@ -2,6 +2,8 @@
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var Lista = Model.Where(x => x.Cantidad > 0).ToList();
+
 }
 
 <div class="card">
@@ -15,30 +17,44 @@
         <div class="row">
 
             <div class="row col-12">
-                @foreach (var item in Model)
+
+                @if (Lista.Count > 0)
                 {
-                    <div class="col-12 col-sm-6 col-md-3">
-                        <!-- Máximo 3 por fila desde md -->
-                        <div class="card h-100 shadow-sm">
-                            <img src="@item.Imagen" class="card-img-top" style="height: 200px; object-fit: contain;" />
-                            <div class="card-body d-flex flex-column">
-                                <h5 class="card-title">@item.Nombre</h5>
-                                <p class="card-text">@item.Descripcion</p>
+                    foreach (var item in Lista)
+                    {
+                        <div class="col-12 col-sm-6 col-md-3">
+                            <!-- Máximo 3 por fila desde md -->
+                            <div class="card h-100 shadow-sm">
+                                <img src="@item.Imagen" class="card-img-top" style="height: 200px; object-fit: contain;" />
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title">@item.Nombre</h5>
+                                    <p class="card-text">@item.Descripcion</p>
 
-                                <ul class="list-group list-group-flush mb-3">
-                                    <li class="list-group-item"><strong>Cantidad:</strong> @item.Cantidad</li>
-                                    <li class="list-group-item"><strong>Precio:</strong> $ @item.Precio.ToString("N2")</li>
-                                </ul>
+                                    <ul class="list-group list-group-flush mb-3">
+                                        <li class="list-group-item"><strong>Cantidad:</strong> @item.Cantidad</li>
+                                        <li class="list-group-item"><strong>Precio:</strong> $ @item.Precio.ToString("N2")</li>
+                                    </ul>
 
-                                <div class="mt-auto text-center">
-                                    <button class="btn btn-primary" onclick="AgregarAlCarrito(@item.IdProducto)">
-                                        Agregar al carrito
-                                    </button>
+                                    <div class="mt-auto text-center">
+                                        <button class="btn btn-primary" onclick="AgregarAlCarrito(@item.IdProducto)">
+                                            Agregar al carrito
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                    }
+                }
+                else
+                {
+                    <div class="col-12">
+                        <div class="card h-100 shadow-sm text-center p-4">
+                            <h5 class="card-title">No hay productos disponibles en este momento</h5>
+                            <p class="card-text">Por favor, vuelve más tarde o revisa otros productos.</p>
+                        </div>
                     </div>
                 }
+
             </div>
 
         </div>

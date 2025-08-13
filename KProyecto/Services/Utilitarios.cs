@@ -89,5 +89,27 @@ namespace KProyecto.Services
             }
         }
 
+        public List<TMaestro> ConsultarDatosFacturas()
+        {
+            var IdUsuario = long.Parse(HttpContext.Current.Session["IdUsuario"].ToString());
+            using (var dbContext = new KNDataBaseEntities())
+            {
+                var facturas = dbContext.TMaestro.Include("TDetalle")
+                    .Where(x => x.IdUsuario == IdUsuario).ToList();
+                return facturas;
+            }
+        }
+
+        public List<TDetalle> ConsultarDatosDetalleFactura(long Id)
+        {
+            using (var dbContext = new KNDataBaseEntities())
+            {
+                var detalles = dbContext.TDetalle.Include("TProducto")
+                    .Where(x => x.IdMaestro == Id).ToList();
+                return detalles;
+            }
+        }
+        
+
     }
 }

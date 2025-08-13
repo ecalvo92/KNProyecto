@@ -1,0 +1,62 @@
+﻿@model List<KProyecto.EF.TDetalle>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+
+
+    <div class="card-body">
+        <h4 class="card-title">Factura # @Model.FirstOrDefault().IdMaestro</h4>
+
+        <hr><br />
+
+        <div class="row">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-10">
+
+                @if (!string.IsNullOrEmpty(ViewBag.Mensaje))
+                {
+                    <div class="alert alert-warning text-center">
+                        @ViewBag.Mensaje
+                    </div>
+                }
+
+                <table id="TablaDatos" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Nombre</th>
+                            <th>Cantidad</th>
+                            <th>Precio</th>
+                            <th>SubTotal</th>
+                            <th>Impuestos</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.IdProducto</td>
+                                <td>@item.TProducto.Nombre</td>
+                                <td>@item.Cantidad</td>
+                                <td>$ @item.Precio.ToString("N2")</td>
+                                <td>$ @item.SubTotal.ToString("N2")</td>
+                                <td>$ @item.Impuesto.ToString("N2")</td>
+                                <td>$ @item.Total.ToString("N2")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="~/Scripts/jquery.min.js"></script>
+<script src="~/Scripts/Site/ConsultaCarrito.js"></script>

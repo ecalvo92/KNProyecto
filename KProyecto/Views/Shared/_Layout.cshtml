@@ -64,16 +64,22 @@
                 <div class="navbar-collapse collapse" id="navbarSupportedContent">
 
                     <ul class="navbar-nav float-left mr-auto">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="m-l-5 font-medium d-none d-sm-inline-block"></span>
 
-                                <i class="fa fa-shopping-cart mr-2"></i>@total + IVAI
-                                <i class="fa fa-tags mr-2 ml-2"></i>@cantidad
+                        @if (idRol == "1")
+                        {
 
-                            </a>
-                        </li>
-                    </ul>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="m-l-5 font-medium d-none d-sm-inline-block"></span>
+
+                                    <i class="fa fa-shopping-cart mr-2"></i>@total + IVAI
+                                    <i class="fa fa-tags mr-2 ml-2"></i>@cantidad
+
+                                </a>
+                            </li>
+                        }
+
+                        </ul>
                     <ul class="navbar-nav float-right">
 
                         <li class="nav-item dropdown">

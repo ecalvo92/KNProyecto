@@ -96,6 +96,28 @@ INSERT [dbo].[TDetalle] ([IdDetalle], [IdMaestro], [IdProducto], [Precio], [Cant
 GO
 INSERT [dbo].[TDetalle] ([IdDetalle], [IdMaestro], [IdProducto], [Precio], [Cantidad], [SubTotal], [Impuesto], [Total]) VALUES (3, 2, 3, CAST(1900.00 AS Decimal(18, 2)), 3, CAST(5700.00 AS Decimal(18, 2)), CAST(741.00 AS Decimal(18, 2)), CAST(6441.00 AS Decimal(18, 2)))
 GO
+INSERT [dbo].[TDetalle] ([IdDetalle], [IdMaestro], [IdProducto], [Precio], [Cantidad], [SubTotal], [Impuesto], [Total]) VALUES (4, 3, 2, CAST(1600.00 AS Decimal(18, 2)), 2, CAST(3200.00 AS Decimal(18, 2)), CAST(416.00 AS Decimal(18, 2)), CAST(3616.00 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[TDetalle] ([IdDetalle], [IdMaestro], [IdProducto], [Precio], [Cantidad], [SubTotal], [Impuesto], [Total]) VALUES (5, 4, 1, CAST(140.00 AS Decimal(18, 2)), 1, CAST(140.00 AS Decimal(18, 2)), CAST(18.20 AS Decimal(18, 2)), CAST(158.20 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[TDetalle] ([IdDetalle], [IdMaestro], [IdProducto], [Precio], [Cantidad], [SubTotal], [Impuesto], [Total]) VALUES (6, 5, 1, CAST(140.00 AS Decimal(18, 2)), 1, CAST(140.00 AS Decimal(18, 2)), CAST(18.20 AS Decimal(18, 2)), CAST(158.20 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[TDetalle] ([IdDetalle], [IdMaestro], [IdProducto], [Precio], [Cantidad], [SubTotal], [Impuesto], [Total]) VALUES (7, 6, 1, CAST(140.00 AS Decimal(18, 2)), 2, CAST(280.00 AS Decimal(18, 2)), CAST(36.40 AS Decimal(18, 2)), CAST(316.40 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[TDetalle] ([IdDetalle], [IdMaestro], [IdProducto], [Precio], [Cantidad], [SubTotal], [Impuesto], [Total]) VALUES (8, 6, 3, CAST(1900.00 AS Decimal(18, 2)), 6, CAST(11400.00 AS Decimal(18, 2)), CAST(1482.00 AS Decimal(18, 2)), CAST(12882.00 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[TDetalle] ([IdDetalle], [IdMaestro], [IdProducto], [Precio], [Cantidad], [SubTotal], [Impuesto], [Total]) VALUES (9, 7, 3, CAST(1900.00 AS Decimal(18, 2)), 1, CAST(1900.00 AS Decimal(18, 2)), CAST(247.00 AS Decimal(18, 2)), CAST(2147.00 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[TDetalle] ([IdDetalle], [IdMaestro], [IdProducto], [Precio], [Cantidad], [SubTotal], [Impuesto], [Total]) VALUES (10, 8, 3, CAST(1900.00 AS Decimal(18, 2)), 1, CAST(1900.00 AS Decimal(18, 2)), CAST(247.00 AS Decimal(18, 2)), CAST(2147.00 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[TDetalle] ([IdDetalle], [IdMaestro], [IdProducto], [Precio], [Cantidad], [SubTotal], [Impuesto], [Total]) VALUES (11, 9, 1, CAST(140.00 AS Decimal(18, 2)), 1, CAST(140.00 AS Decimal(18, 2)), CAST(18.20 AS Decimal(18, 2)), CAST(158.20 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[TDetalle] ([IdDetalle], [IdMaestro], [IdProducto], [Precio], [Cantidad], [SubTotal], [Impuesto], [Total]) VALUES (12, 9, 3, CAST(1900.00 AS Decimal(18, 2)), 1, CAST(1900.00 AS Decimal(18, 2)), CAST(247.00 AS Decimal(18, 2)), CAST(2147.00 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[TDetalle] ([IdDetalle], [IdMaestro], [IdProducto], [Precio], [Cantidad], [SubTotal], [Impuesto], [Total]) VALUES (13, 10, 3, CAST(51500.00 AS Decimal(18, 2)), 1, CAST(51500.00 AS Decimal(18, 2)), CAST(6695.00 AS Decimal(18, 2)), CAST(58195.00 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[TDetalle] ([IdDetalle], [IdMaestro], [IdProducto], [Precio], [Cantidad], [SubTotal], [Impuesto], [Total]) VALUES (14, 11, 2, CAST(75.00 AS Decimal(18, 2)), 12, CAST(900.00 AS Decimal(18, 2)), CAST(117.00 AS Decimal(18, 2)), CAST(1017.00 AS Decimal(18, 2)))
+GO
 SET IDENTITY_INSERT [dbo].[TDetalle] OFF
 GO
 
@@ -105,16 +127,36 @@ INSERT [dbo].[TMaestro] ([IdMaestro], [IdUsuario], [FechaCompra], [TotalPagado])
 GO
 INSERT [dbo].[TMaestro] ([IdMaestro], [IdUsuario], [FechaCompra], [TotalPagado]) VALUES (2, 2, CAST(N'2025-08-05T20:57:28.037' AS DateTime), CAST(6441.00 AS Decimal(18, 2)))
 GO
+INSERT [dbo].[TMaestro] ([IdMaestro], [IdUsuario], [FechaCompra], [TotalPagado]) VALUES (3, 2, CAST(N'2025-08-12T18:27:17.543' AS DateTime), CAST(3616.00 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[TMaestro] ([IdMaestro], [IdUsuario], [FechaCompra], [TotalPagado]) VALUES (4, 2, CAST(N'2025-08-12T18:35:03.710' AS DateTime), CAST(158.20 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[TMaestro] ([IdMaestro], [IdUsuario], [FechaCompra], [TotalPagado]) VALUES (5, 3, CAST(N'2025-08-12T18:35:27.407' AS DateTime), CAST(158.20 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[TMaestro] ([IdMaestro], [IdUsuario], [FechaCompra], [TotalPagado]) VALUES (6, 2, CAST(N'2025-08-12T18:48:29.577' AS DateTime), CAST(13198.40 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[TMaestro] ([IdMaestro], [IdUsuario], [FechaCompra], [TotalPagado]) VALUES (7, 2, CAST(N'2025-08-12T18:54:12.520' AS DateTime), CAST(2147.00 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[TMaestro] ([IdMaestro], [IdUsuario], [FechaCompra], [TotalPagado]) VALUES (8, 3, CAST(N'2025-08-12T18:56:34.080' AS DateTime), CAST(2147.00 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[TMaestro] ([IdMaestro], [IdUsuario], [FechaCompra], [TotalPagado]) VALUES (9, 2, CAST(N'2025-08-12T18:57:39.140' AS DateTime), CAST(2305.20 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[TMaestro] ([IdMaestro], [IdUsuario], [FechaCompra], [TotalPagado]) VALUES (10, 6, CAST(N'2025-08-12T20:01:54.413' AS DateTime), CAST(58195.00 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[TMaestro] ([IdMaestro], [IdUsuario], [FechaCompra], [TotalPagado]) VALUES (11, 2, CAST(N'2025-08-12T20:17:13.113' AS DateTime), CAST(1017.00 AS Decimal(18, 2)))
+GO
 SET IDENTITY_INSERT [dbo].[TMaestro] OFF
 GO
 
 SET IDENTITY_INSERT [dbo].[TProducto] ON 
 GO
-INSERT [dbo].[TProducto] ([IdProducto], [Nombre], [Descripcion], [Cantidad], [Precio], [Estado], [Imagen]) VALUES (1, N'Ps4', N'Consola de video juegos', 4, CAST(140.00 AS Decimal(10, 2)), 1, N'/Productos/1.png')
+INSERT [dbo].[TProducto] ([IdProducto], [Nombre], [Descripcion], [Cantidad], [Precio], [Estado], [Imagen]) VALUES (1, N'Ps4', N'Consola de video juegos', 4, CAST(140.00 AS Decimal(10, 2)), 0, N'/Productos/1.png')
 GO
-INSERT [dbo].[TProducto] ([IdProducto], [Nombre], [Descripcion], [Cantidad], [Precio], [Estado], [Imagen]) VALUES (2, N'Ps7', N'Producto nuevo que no ha salido', 2, CAST(1600.00 AS Decimal(10, 2)), 1, N'/Productos/2.png')
+INSERT [dbo].[TProducto] ([IdProducto], [Nombre], [Descripcion], [Cantidad], [Precio], [Estado], [Imagen]) VALUES (2, N'Ps7', N'Producto nuevo que no ha salido', 0, CAST(75.00 AS Decimal(10, 2)), 1, N'/Productos/2.png')
 GO
-INSERT [dbo].[TProducto] ([IdProducto], [Nombre], [Descripcion], [Cantidad], [Precio], [Estado], [Imagen]) VALUES (3, N'Ps 10', N'Play nuevo', 6, CAST(1900.00 AS Decimal(10, 2)), 1, N'/Productos/3.png')
+INSERT [dbo].[TProducto] ([IdProducto], [Nombre], [Descripcion], [Cantidad], [Precio], [Estado], [Imagen]) VALUES (3, N'Ps 10', N'Play nuevo', 5, CAST(51500.00 AS Decimal(10, 2)), 1, N'/Productos/3.png')
+GO
+INSERT [dbo].[TProducto] ([IdProducto], [Nombre], [Descripcion], [Cantidad], [Precio], [Estado], [Imagen]) VALUES (4, N'Ps17', N'111', 12, CAST(75.00 AS Decimal(10, 2)), 1, N'/Productos/4.png')
 GO
 SET IDENTITY_INSERT [dbo].[TProducto] OFF
 GO
@@ -133,6 +175,18 @@ GO
 INSERT [dbo].[TUsuario] ([IdUsuario], [Identificacion], [Nombre], [Correo], [Contrasenna], [IdRol], [Estado]) VALUES (1, N'304590415', N'CALVO CASTILLO EDUARDO JOSE', N'ecalvo90415@ufide.ac.cr', N'90415', 2, 1)
 GO
 INSERT [dbo].[TUsuario] ([IdUsuario], [Identificacion], [Nombre], [Correo], [Contrasenna], [IdRol], [Estado]) VALUES (2, N'113620173', N'CARLOS HUMBERTO VILLALOBOS PICADO', N'cvillalobos20173@ufide.ac.cr', N'20173', 1, 1)
+GO
+INSERT [dbo].[TUsuario] ([IdUsuario], [Identificacion], [Nombre], [Correo], [Contrasenna], [IdRol], [Estado]) VALUES (3, N'305550650', N'JOHNNY FABIAN CASTILLO FALLAS', N'jcastillo50650@ufide.ac.cr', N'50650', 1, 1)
+GO
+INSERT [dbo].[TUsuario] ([IdUsuario], [Identificacion], [Nombre], [Correo], [Contrasenna], [IdRol], [Estado]) VALUES (4, N'304590416', N'FRANCINI DE LOS ANGELES ROMERO ARAYA', N'ecalvo90416@ufide.ac.cr', N'90416', 1, 1)
+GO
+INSERT [dbo].[TUsuario] ([IdUsuario], [Identificacion], [Nombre], [Correo], [Contrasenna], [IdRol], [Estado]) VALUES (5, N'304590418', N'JOSUE DAVID TREJOS PARRAS', N'ecalvo90417@ufide.ac.cr', N'90417', 1, 1)
+GO
+INSERT [dbo].[TUsuario] ([IdUsuario], [Identificacion], [Nombre], [Correo], [Contrasenna], [IdRol], [Estado]) VALUES (6, N'304590418', N'JESUS ALBERTO NUÑEZ MOYA', N'ecalvo90418@ufide.ac.cr', N'90418', 1, 1)
+GO
+INSERT [dbo].[TUsuario] ([IdUsuario], [Identificacion], [Nombre], [Correo], [Contrasenna], [IdRol], [Estado]) VALUES (7, N'304590419', N'YAILYN PAOLA CESPEDES RODRIGUEZ', N'ecalvo90419@ufide.ac.cr', N'90419', 1, 1)
+GO
+INSERT [dbo].[TUsuario] ([IdUsuario], [Identificacion], [Nombre], [Correo], [Contrasenna], [IdRol], [Estado]) VALUES (8, N'304590420', N'CAROLINA DE LOS ANGELES ANGULO CALVO', N'ecalvo90420@ufidelitas.ac.cr', N'90419', 1, 1)
 GO
 SET IDENTITY_INSERT [dbo].[TUsuario] OFF
 GO

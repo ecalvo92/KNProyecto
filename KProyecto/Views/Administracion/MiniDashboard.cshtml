@@ -1,3 +1,126 @@
-﻿@{
+﻿@model KProyecto.Models.AdminValues
+
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<div class="row">
+    <div class="col-lg-3 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-7">
+                        <i class="mdi mdi-emoticon font-20 text-info"></i>
+                        <p class="font-16 m-b-5">Clientes</p>
+                    </div>
+                    <div class="col-5">
+                        <h1 class="font-light text-right mb-0">@Model.CantidadClientes</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-7">
+                        <i class="mdi mdi-currency-eur font-20 text-purple"></i>
+                        <p class="font-16 m-b-5">Productos Activos</p>
+                    </div>
+                    <div class="col-5">
+                        <h1 class="font-light text-right mb-0">@Model.CantidadProductosActivos</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-7">
+                        <i class="mdi mdi-currency-eur font-20 text-purple"></i>
+                        <p class="font-16 m-b-5">Productos Inactivos</p>
+                    </div>
+                    <div class="col-5">
+                        <h1 class="font-light text-right mb-0">@Model.CantidadProductosInactivos</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- column -->
+    <div class="col-lg-6 col-md-12">
+        <div class="card">
+
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th class="border-top-0">Identificación</th>
+                            <th class="border-top-0">Nombre</th>
+                            <th class="border-top-0">Monto Compras</th>
+                            <th class="border-top-0">Cantidad Compras</th>
+                            <th class="border-top-0">Última Compra</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model.ClientesTop)
+                        {
+                            <tr>
+                                <td class="txt-oflo">@item.Identificacion</td>
+                                <td class="txt-oflo">@item.Nombre</td>
+                                <td><span class="label label-success label-rounded">$ @item.TMaestro.Sum(x => x.TotalPagado).ToString("N2")</span> </td>
+                                <td class="txt-oflo">@item.TMaestro.Count</td>
+                                <td class="txt-oflo">
+                                    @(item.TMaestro.Count > 0 ?
+                                item.TMaestro.LastOrDefault().FechaCompra.ToString("dd/MM/yyyy") :
+                                "")
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6 col-md-12">
+        <div class="card">
+
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th class="border-top-0">Id</th>
+                            <th class="border-top-0">Nombre</th>
+                            <th class="border-top-0">Monto</th>
+                            <th class="border-top-0">Cantidad</th>
+                            <th class="border-top-0">Inventario Actual</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model.ProductosTop)
+                        {
+                            <tr>
+                                <td class="txt-oflo">@item.IdProducto</td>
+                                <td class="txt-oflo">@item.Nombre</td>
+                                <td><span class="label label-success label-rounded">$ @item.TDetalle.Sum(x => x.Total).ToString("N2")</span> </td>
+                                <td class="txt-oflo">@item.TDetalle.Sum(x => x.Cantidad).ToString("N2")</td>
+                                <td class="txt-oflo">@item.Cantidad</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
